@@ -55,7 +55,7 @@
     <p class="stand">Kündigung deines Buckswood-Premium-Abos, ohne Anmeldung.</p>
 
     <h2>Kündigung</h2>
-    <p>Gib die E-Mail-Adresse an, mit der du Premium gebucht hast. Das Abo endet zum Ende des bereits bezahlten Monats; bis dahin bleibt Premium aktiv. Es wird nichts mehr abgebucht.</p>
+    <p>Gib die E-Mail-Adresse an, mit der du Premium gebucht hast. Das Abo endet zum Ende des bereits bezahlten Monats; bis dahin bleibt Premium aktiv. Es wird nichts mehr abgebucht. Du bekommst eine Bestätigung per E-Mail.</p>
     <form class="form" id="form" novalidate>
       <label for="email">E-Mail-Adresse (Pflicht)
         <input id="email" name="email" type="email" autocomplete="email" required>
@@ -109,9 +109,10 @@
         var at=new Date(x.d.received).toLocaleString('de-DE');
         var end=x.d.ends?new Date(x.d.ends).toLocaleDateString('de-DE'):null;
         form.hidden=true;done.hidden=false;
-        done.innerHTML='<p><b>Deine Kündigung ist eingegangen.</b></p><p></p><p></p>';
+        done.innerHTML='<p><b>Deine Kündigung ist eingegangen.</b></p><p></p><p></p><p></p>';
         var p=done.querySelectorAll('p');
         p[1].textContent='Eingang: '+at+' · E-Mail: '+email;
+        p[3].textContent=x.d.mailed?'Eine Bestätigung haben wir an '+email+' geschickt.':'Bitte speichere oder fotografiere diese Seite als Bestätigung.';
         p[2].textContent=end?'Dein Premium-Abo endet am '+end+'. Bis dahin bleibt Premium aktiv, danach wird nichts mehr abgebucht.':'Falls zu dieser E-Mail-Adresse ein Premium-Abo besteht, endet es zum Ende des bezahlten Monats. Bei Fragen schreib an luikienle@gmail.com.';
       })
       .catch(function(){err.textContent='Keine Verbindung. Bitte versuch es noch einmal oder schreib an luikienle@gmail.com.';btn.disabled=false;btn.textContent='Jetzt kündigen'});
