@@ -4,6 +4,7 @@
 //   STRIPE_PRICE_ID     price_… of the "Buckswood Premium" monthly price
 //   SESSION_SECRET      long random string that signs the Premium cookie
 //   STRIPE_AUTOMATIC_TAX=1   optional, only once Stripe Tax is set up
+//   STRIPE_TOS_CONSENT=1     optional, required terms checkbox (needs terms URL in Stripe)
 import crypto from 'node:crypto';
 
 export const SITE = process.env.SITE_URL || 'https://www.buckswood.art';
