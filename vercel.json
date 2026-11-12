@@ -4,5 +4,12 @@
   "buildCommand": "",
   "installCommand": "",
   "outputDirectory": ".",
-  "cleanUrls": true
+  "cleanUrls": true,
+  "redirects": [
+    {
+      "source": "/microdramas",
+      "destination": "/",
+      "permanent": false
+    }
+  ]
 }

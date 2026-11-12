@@ -1,0 +1,106 @@
+/* Buckswood Studios – platform styles shared by the home page, the player and /about.
+   Concept "the reveal": every still rests in black and white and takes its colour only
+   when it is chosen, the way each episode reveals who someone really is.
+   One spot colour (the yellow of the cleaner's bucket), everything else monotone.
+   Type: Apple's system face (SF Pro; Inter where SF is missing), set the way apple.com
+   and tesla.com do: few weights, big tight headlines, calm 17px body. The BUCKSWOOD
+   wordmark keeps its own face so the logo stays exactly as it was.
+   Layout: vertical 9:16 frames on a black stage, as in Shorts, TikTok and Reels.
+   Deliberately a single dark look. */
+:root{
+  --ink:#0C0C0D;        /* stage black */
+  --film:#151517;       /* raised surfaces */
+  --grain:#26262A;      /* hairlines, inactive borders */
+  --paper:#EDEAE4;      /* primary text */
+  --ash:#8E8B86;        /* secondary text */
+  --bucket:#F2BE22;     /* the one spot colour */
+  --bucket-ink:#191303; /* text on the spot colour */
+  --display:-apple-system,"SF Pro Display",BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --ui:-apple-system,"SF Pro Text",BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif;
+  --mark:"Cormorant Garamond",Georgia,serif;
+  --gut:max(16px,env(safe-area-inset-left,0px));
+  --gut-r:max(16px,env(safe-area-inset-right,0px));
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--ink);color:var(--paper);font-family:var(--ui);font-size:17px;line-height:1.47;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+button{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--bucket);outline-offset:3px}
+h1,h2,h3{margin:0;font-family:var(--display);font-weight:600;letter-spacing:-.022em;line-height:1.08;text-wrap:balance}
+.shell{max-width:1320px;margin:0 auto;padding-left:var(--gut);padding-right:var(--gut-r)}
+
+/* top bar: the logo stays exactly as it is */
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--ink)}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:rgba(12,12,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--grain)}
+.top .shell{display:flex;align-items:center;gap:28px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand img{height:36px;width:auto}
+.brand span{font-family:var(--mark);font-weight:600;font-size:21px;letter-spacing:.2em;line-height:1}
+.tabs{display:flex;gap:24px;font-size:14px;font-weight:400;letter-spacing:-.01em}
+.tabs a{text-decoration:none;color:var(--ash);padding:21px 0;border-bottom:2px solid transparent}
+.tabs a:hover{color:var(--paper)}
+.tabs a[aria-current=page]{color:var(--paper);border-bottom-color:var(--bucket)}
+.top .end{margin-left:auto;display:flex;align-items:center;gap:12px}
+.tier{font-size:11.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ash);white-space:nowrap}
+.tier.premium{color:var(--bucket)}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:6px;min-height:44px;padding:10px 24px;font-weight:500;font-size:15px;letter-spacing:-.01em;text-decoration:none;border:0;background:rgba(237,234,228,.14);backdrop-filter:blur(10px);cursor:pointer;transition:background .15s,color .15s,border-color .15s;white-space:nowrap}
+.btn svg{width:16px;height:16px;flex:none}
+.btn:hover{background:rgba(237,234,228,.24)}
+.btn-spot{background:var(--bucket);color:var(--bucket-ink)}
+.btn-spot:hover{background:#FFD24A}
+.btn-sm{min-height:34px;padding:6px 16px;font-size:13.5px;border-radius:999px}
+
+/* labels */
+.label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ash)}
+.chip{display:inline-flex;align-items:center;font-size:12.5px;font-weight:500;padding:5px 11px;border:1px solid var(--grain);border-radius:999px;color:var(--ash);background:none;white-space:nowrap}
+button.chip{cursor:pointer}
+button.chip:hover{color:var(--paper);border-color:var(--ash)}
+button.chip[aria-pressed=true]{background:var(--paper);border-color:var(--paper);color:var(--ink)}
+.badge{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:2px 6px;border-radius:3px;background:var(--bucket);color:var(--bucket-ink)}
+.badge.ep{background:rgba(12,12,13,.78);color:var(--paper);font-variant-numeric:tabular-nums}
+
+/* the reveal: monochrome at rest, colour when chosen */
+.still{filter:grayscale(1) contrast(1.06) brightness(.92);transition:filter .45s ease,transform .45s ease}
+@media (hover:hover){
+  .reveal:hover .still,.reveal:focus-visible .still{filter:none;transform:scale(1.035)}
+}
+@media (hover:none){.still{filter:grayscale(.35)}}
+.is-current .still,.still.lit{filter:none}
+
+/* 9:16 card */
+.card{position:relative;display:block;text-decoration:none;color:var(--paper)}
+.card .frame{position:relative;aspect-ratio:9/16;max-width:100%;overflow:hidden;border-radius:6px;background:var(--film)}
+.card .frame img{width:100%;height:100%;object-fit:cover}
+.card .frame::after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(12,12,13,.92))}
+.card .tl{position:absolute;left:8px;top:8px;z-index:1;display:flex;gap:5px}
+.card .cap{position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
+.card .cap b{display:block;font-family:var(--display);font-weight:600;font-size:16px;line-height:1.15;letter-spacing:-.015em;text-shadow:0 1px 8px rgba(0,0,0,.6)}
+.card .cap small{display:block;margin-top:3px;font-size:12px;color:var(--ash)}
+.bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.18);z-index:2}
+.bar i{display:block;height:100%;background:var(--bucket)}
+
+/* rails */
+.row{padding-block:34px 6px}
+.row-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin-bottom:16px}
+.row-head h2{font-size:clamp(22px,2.4vw,28px);font-weight:600}
+.rail{display:grid;grid-auto-flow:column;grid-auto-columns:clamp(132px,15vw,188px);gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--grain) transparent}
+.rail>*{scroll-snap-align:start}
+
+footer.site{margin-top:72px;border-top:1px solid var(--grain);padding-block:40px 56px;color:var(--ash);font-size:14px}
+footer.site .shell{display:flex;flex-wrap:wrap;gap:20px 40px;align-items:flex-start;justify-content:space-between}
+footer.site nav{display:flex;flex-wrap:wrap;gap:10px 24px}
+footer.site a{text-decoration:none;color:var(--paper)}
+footer.site a:hover{color:var(--bucket)}
+footer.site p{margin:6px 0 0;max-width:420px}
+
+@media (max-width:760px){
+  .tabs{display:none}
+  .tier{display:none}
+  .brand span{font-size:17px;letter-spacing:.14em}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}

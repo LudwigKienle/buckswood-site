@@ -1,17 +1,21 @@
-# Buckswood – Landing Page
+# Buckswood Studios – buckswood.art
 
-Static page (one `index.html` and `assets/`) for Buckswood – AI Video Production Editor.
-The download buttons point to GitHub Releases (`/releases/latest/download/...`), so every new release appears automatically.
-The version and file sizes are loaded live from the GitHub API, with v3.1.0 as the fallback.
+Static site on Vercel (`vercel.json`: no build, clean URLs). Pushing to `main` deploys live.
 
-Local preview: `python3 -m http.server 8765` → http://localhost:8765
+| URL | File | What |
+|---|---|---|
+| `/` | `index.html` | Microdrama platform home: featured banner, trending, new episodes, all series, plans |
+| `/watch` | `watch.html` | Vertical player, deep links like `/watch#the-new-cleaner-2` |
+| `/about` | `about.html` | Studio, results and the case, partner contact |
+| `/editor` | `editor.html` | Old landing page of the AI Video Production Editor (moves elsewhere) |
+| `/microdramas` | redirect | → `/` |
 
-Hosting: any static host works (Vercel, GitHub Pages, Netlify). Once the domain is set, add a `CNAME` file containing the domain for GitHub Pages, or add the domain in the Vercel project settings.
+Series and episodes live in one place: `assets/catalog.js`. Shared look: `assets/platform.css`.
+Local preview: any static server that maps `/watch` to `watch.html` (e.g. `npx serve`).
 
 ## Microdramas
 
-- `microdramas.html` → buckswood.art/microdramas: series, results, plans (Free with ads / Premium without ads), the case, contact.
-- `watch.html` → buckswood.art/watch: vertical player for the episodes in `media/episodes/` (720p MP4, deep links like `/watch#the-new-cleaner-2`).
+- Episodes: `media/episodes/` (720p MP4). To add one: encode it to 720×1280 H.264 with faststart, add a poster still to `assets/microdramas/`, add an entry in `assets/catalog.js`.
 - Free viewers get a pre-roll ad through the Google IMA SDK; Premium viewers get none. Settings sit at the top of the script in `watch.html`:
   - `AD_TAG`: currently Google's public **sample** tag. Replace it with the VAST tag of your own Google Ad Manager ad unit before launch.
   - `STRIPE_LINK`: Stripe Payment Link for Premium. Empty = "Notify me" mail link.

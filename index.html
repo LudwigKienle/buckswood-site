@@ -2,413 +2,286 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Buckswood – AI Video Production Editor</title>
-<meta name="description" content="Buckswood is a free, open-source creative studio for AI filmmaking: script, storyboard, generate, design sets, edit, grade, mix and deliver. One goal: make everyone happy.">
-<meta name="theme-color" content="#1F3A2D">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Buckswood Studios</title>
+<meta name="description" content="Original microdramas from Buckswood Studios: two-minute episodes about betrayal, revenge and second chances. Watch free with ads, or ad-free with Premium.">
+<meta name="theme-color" content="#0C0C0D">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://buckswood.art/">
 <link rel="canonical" href="https://buckswood.art/">
-<meta property="og:title" content="Buckswood – the creative software that makes everyone happy">
-<meta property="og:description" content="Ever searched for creative software that feels like a gift from the gods? Free & open source for macOS and Windows.">
-<meta property="og:image" content="https://buckswood.art/assets/og.jpg">
+<meta property="og:title" content="Buckswood Studios – Original Microdramas">
+<meta property="og:description" content="Two-minute episodes about betrayal, revenge and second chances.">
+<meta property="og:image" content="https://buckswood.art/assets/microdramas/banner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/platform.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"SoftwareApplication","name":"Buckswood – AI Video Production Editor","applicationCategory":"MultimediaApplication","operatingSystem":"macOS, Windows","downloadUrl":"https://github.com/LudwigKienle/ai-video-production-editor/releases/latest","codeRepository":"https://github.com/LudwigKienle/ai-video-production-editor","license":"https://www.gnu.org/licenses/gpl-3.0.html","author":{"@type":"Person","name":"Ludwig Maximillian Kienle"},"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
+{"@context":"https://schema.org","@type":"Organization","name":"Buckswood Studios","url":"https://buckswood.art/","logo":"https://buckswood.art/assets/mark.png","founder":{"@type":"Person","name":"Ludwig Maximillian Kienle"},"sameAs":["https://www.youtube.com/@Buckswood-Studios"]}
 </script>
 <style>
-:root{
-  --cream:#F4EEE3; --paper:#FBF8F2; --green:#1F3A2D; --green-2:#2C4C3C; --ink:#1B241F;
-  --muted:#5E6A62; --gold:#B8862E; --gold-2:#9A6E22; --line:#E2D8C6;
-  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
+/* featured banner */
+.feature{position:relative;overflow:hidden;border-bottom:1px solid var(--grain)}
+.feature .backdrop{position:absolute;inset:-40px;background:center/cover no-repeat;filter:grayscale(1) blur(28px) brightness(.38);transform:scale(1.1);transition:background-image .6s}
+.feature .backdrop::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--ink) 8%,rgba(12,12,13,.55) 60%,rgba(12,12,13,.2))}
+.feature .shell{position:relative;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:clamp(24px,5vw,72px);align-items:center;padding-block:clamp(36px,6vw,72px)}
+.feature .copy{min-width:0;max-width:640px}
+.feature .meta{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px}
+.feature h1{font-weight:700;font-size:clamp(48px,7.6vw,96px);line-height:1;letter-spacing:-.035em;margin:16px 0 14px}
+.feature .hook{font-family:var(--display);font-size:clamp(21px,2.2vw,28px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin:0;max-width:24ch}
+.feature .log{color:var(--ash);margin:12px 0 0;max-width:56ch}
+.feature .tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.feature .acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.feature .screen{position:relative;width:clamp(200px,22vw,300px);aspect-ratio:9/16;max-width:100%;border-radius:8px;overflow:hidden;background:#000;box-shadow:0 40px 90px -30px #000}
+.feature .screen video,.feature .screen img{width:100%;height:100%;object-fit:cover}
+.picker{display:flex;gap:18px;margin-top:36px}
+.picker button{display:grid;justify-items:center;gap:7px;padding:0;border:0;background:none;cursor:pointer;font-size:12px;color:var(--ash);width:72px}
+.picker .ring{width:64px;height:64px;border-radius:50%;padding:3px;border:2px solid var(--grain);transition:border-color .2s}
+.picker .ring img{width:100%;height:100%;border-radius:50%;object-fit:cover;object-position:50% 25%}
+.picker button[aria-current=true]{color:var(--paper)}
+.picker button[aria-current=true] .ring{border-color:var(--bucket)}
+.picker span.name{line-height:1.2;text-align:center}
+
+/* trending: ranked by views */
+.ranked{display:grid;grid-template-columns:repeat(3,minmax(0,330px));gap:clamp(12px,2.5vw,36px)}
+.ranked .card{display:grid;grid-template-columns:auto minmax(0,1fr);align-items:end}
+.ranked .num{font-family:var(--display);font-weight:800;font-size:clamp(96px,13vw,190px);line-height:.76;letter-spacing:-.06em;color:var(--ink);-webkit-text-stroke:2px var(--ash);margin-right:-.1em;position:relative;z-index:1;font-variant-numeric:lining-nums}
+.ranked .card:hover .num,.ranked .card:focus-visible .num{-webkit-text-stroke-color:var(--bucket)}
+
+/* all series */
+.filters{display:flex;flex-wrap:wrap;gap:8px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:18px 14px}
+.grid .card .under{margin-top:8px;font-size:13px;color:var(--ash)}
+
+/* plans */
+.plans{margin-top:72px;border-top:1px solid var(--grain);border-bottom:1px solid var(--grain);background:var(--film)}
+.plans .shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:clamp(28px,5vw,72px);padding-block:clamp(44px,6vw,72px);align-items:center}
+.plans h2{font-weight:700;font-size:clamp(34px,4.4vw,56px);line-height:1.04;letter-spacing:-.035em}
+.plans .intro p{color:var(--ash);margin:16px 0 0;max-width:42ch}
+.tiers{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.plan{border:1px solid var(--grain);border-radius:18px;padding:24px;display:flex;flex-direction:column;gap:6px;background:var(--ink)}
+.plan.premium{border-color:var(--bucket)}
+.plan h3{font-size:28px;font-weight:700;letter-spacing:-.03em}
+.plan .price{font-size:14px;color:var(--ash)}
+.plan ul{list-style:none;margin:12px 0 18px;padding:0;display:grid;gap:8px;font-size:14.5px;flex:1}
+.plan li{display:flex;gap:10px}
+.plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--paper)}
+.plan li.minus::before{background:none;border:1px solid var(--ash)}
+.plan.premium li::before{background:var(--bucket)}
+.preview{grid-column:1/-1;font-size:13px;color:var(--ash)}
+.preview button{background:none;border:0;padding:0;color:var(--paper);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+@media (max-width:860px){
+  .feature .shell{grid-template-columns:1fr}
+  .feature .screen{display:none}
+  .ranked{grid-template-columns:1fr 1fr 1fr;gap:8px}
+  .ranked .card{grid-template-columns:1fr}
+  .ranked .num{font-size:64px;margin:0 0 -18px 4px}
+  .plans .shell{grid-template-columns:1fr}
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-img{max-width:100%;display:block}
-a{color:inherit}
-.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
-.eyebrow{font-family:var(--sans);font-weight:500;letter-spacing:.32em;text-transform:uppercase;font-size:12.5px;color:var(--gold-2)}
-h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--green);line-height:1.08;margin:0}
-h2{font-size:clamp(34px,4.6vw,54px)}
-h3{font-size:26px}
-
-/* nav */
-nav{position:sticky;top:0;z-index:20;background:rgba(244,238,227,.86);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
-nav.scrolled{border-bottom-color:var(--line)}
-nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
-.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.brand img{height:40px;width:auto}
-.brand span{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:.2em;color:var(--green)}
-.navlinks{display:flex;gap:28px;align-items:center;font-size:15px}
-.navlinks a{text-decoration:none;color:var(--muted)}
-.navlinks a:hover{color:var(--green)}
-.navlinks a.btn-primary{color:var(--cream)}
-.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;font-weight:500;font-size:16px;text-decoration:none;border:1.5px solid var(--green);transition:transform .15s,background .15s,color .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn-primary{background:var(--green);color:var(--cream)}
-.btn-primary:hover{background:var(--green-2)}
-.btn-ghost{color:var(--green)}
-.btn-ghost:hover{background:var(--green);color:var(--cream)}
-.btn-sm{padding:9px 18px;font-size:14px}
-.btn svg{width:18px;height:18px}
-
-/* hero */
-.hero{text-align:center;padding:72px 0 40px;position:relative}
-.hero .mark{height:min(300px,38vh);width:auto;margin:0 auto 34px;opacity:0;animation:rise 1.1s cubic-bezier(.2,.7,.2,1) .1s forwards}
-.hero .q{font-family:var(--serif);font-style:italic;font-weight:500;font-size:clamp(22px,2.6vw,30px);color:var(--muted);margin:0 0 14px;opacity:0;animation:rise 1s ease .55s forwards}
-.hero h1{font-size:clamp(38px,10.5vw,96px);letter-spacing:.02em;opacity:0;animation:rise 1s ease .8s forwards}
-.hero .rule{width:120px;height:2px;background:var(--gold);margin:28px auto 18px;opacity:0;animation:grow .8s ease 1.2s forwards}
-.hero .claim{letter-spacing:.42em;font-weight:500;color:var(--gold-2);font-size:14px;opacity:0;animation:rise .8s ease 1.3s forwards}
-.hero .lede{max-width:680px;margin:30px auto 0;color:var(--muted);font-size:19px;opacity:0;animation:rise .8s ease 1.45s forwards}
-.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:34px;opacity:0;animation:rise .8s ease 1.6s forwards}
-.meta{margin-top:16px;font-size:14px;color:var(--muted);opacity:0;animation:rise .8s ease 1.7s forwards}
-@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes grow{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
-@media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;transition:none!important}}
-
-.shot{margin:56px auto 0;max-width:1080px;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(31,58,45,.45),0 0 0 1px rgba(31,58,45,.08)}
-
-/* microdramas teaser */
-.dramas{background:#0E0D0B;color:#D8CFC0;padding:88px 0;margin-top:96px}
-.dramas .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
-.dramas .eyebrow{color:#C9A45C}
-.dramas h2{color:#F6F1E7;margin-top:10px}
-.dramas p{font-size:19px;margin:18px 0 0;max-width:520px}
-.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
-.btn-gold{background:#C9A45C;border-color:#C9A45C;color:#0E0D0B}
-.btn-gold:hover{background:#D8B66E}
-.btn-line{border-color:#C9A45C;color:#C9A45C}
-.btn-line:hover{background:#C9A45C;color:#0E0D0B}
-.posters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-.posters img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:12px;box-shadow:0 24px 50px -24px rgba(0,0,0,.9),0 0 0 1px rgba(201,164,92,.2);transition:transform .3s}
-.posters img:nth-child(2){transform:translateY(-18px)}
-.posters:hover img{transform:translateY(-4px)}
-.posters:hover img:nth-child(2){transform:translateY(-22px)}
-
-/* myth */
-.myth{background:var(--green);color:var(--cream);padding:96px 0}
-.myth h2{color:var(--cream)}
-.myth .eyebrow{color:#D6B06A}
-.myth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:48px}
-.myth-grid h3{color:#E9CF94;font-size:30px;margin-bottom:10px}
-.myth-grid p{color:rgba(244,238,227,.82);margin:0}
-.myth-intro{max-width:720px;color:rgba(244,238,227,.85);font-size:19px;margin-top:18px}
-
-/* tools */
-section{scroll-margin-top:80px}
-.tools{padding:110px 0 40px}
-.sec-head{max-width:760px}
-.sec-head p{color:var(--muted);font-size:19px;margin:16px 0 0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-.card{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:28px;position:relative;transition:transform .2s,box-shadow .2s}
-.card:hover{transform:translateY(-3px);box-shadow:0 18px 40px -24px rgba(31,58,45,.4)}
-.card .stage{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold-2);font-weight:500}
-.card h3{margin:8px 0 10px}
-.card p{margin:0;color:var(--muted);font-size:16px}
-.card ul{margin:14px 0 0;padding-left:18px;color:var(--ink);font-size:15.5px}
-.card li{margin:4px 0}
-.chip{position:absolute;top:22px;right:22px;font-size:11.5px;font-weight:500;letter-spacing:.06em;padding:4px 10px;border-radius:999px;border:1px solid var(--line);color:var(--muted);background:var(--cream)}
-.chip.live{border-color:rgba(31,58,45,.25);color:var(--green);background:#E6EEE7}
-
-/* gallery */
-.gallery{padding:90px 0 20px}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-top:36px}
-.tab{font:inherit;font-size:15px;padding:9px 18px;border-radius:999px;border:1px solid var(--line);background:var(--paper);color:var(--muted);cursor:pointer}
-.tab[aria-selected=true]{background:var(--green);border-color:var(--green);color:var(--cream)}
-.viewer{margin-top:24px;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -34px rgba(31,58,45,.45),0 0 0 1px rgba(31,58,45,.08);background:#111;aspect-ratio:16/10}
-.viewer img{width:100%;height:100%;object-fit:cover;transition:opacity .25s}
-.caption{margin-top:14px;color:var(--muted);font-size:15px}
-
-/* agents */
-.agents{padding:100px 0}
-.agents .wrap{display:grid;grid-template-columns:1.05fr 1fr;gap:56px;align-items:center}
-.term{background:#14211A;color:#DCE7DE;border-radius:14px;padding:26px 26px 28px;font:14.5px/1.7 ui-monospace,SFMono-Regular,Menlo,monospace;box-shadow:0 24px 60px -30px rgba(0,0,0,.6);overflow-x:auto}
-.term .p{color:#D6B06A}
-.term .c{color:#7E9786}
-.agents ul{padding-left:18px;color:var(--muted)}
-
-/* download */
-.download{background:var(--paper);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:100px 0;text-align:center}
-.download h2{margin-top:10px}
-.download .sub{color:var(--muted);font-size:19px;max-width:640px;margin:16px auto 0}
-.dl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,340px));gap:20px;justify-content:center;margin-top:44px}
-.dl{display:block;text-align:left;text-decoration:none;background:var(--cream);border:1.5px solid var(--line);border-radius:16px;padding:24px 26px;transition:border-color .15s,transform .15s}
-.dl:hover{border-color:var(--green);transform:translateY(-2px)}
-.dl.recommended{border-color:var(--green);box-shadow:0 0 0 3px rgba(31,58,45,.08)}
-.dl .os{font-family:var(--serif);font-size:28px;font-weight:600;color:var(--green)}
-.dl .det{color:var(--muted);font-size:14.5px;margin-top:2px}
-.dl .go{margin-top:16px;display:inline-flex;align-items:center;gap:8px;color:var(--green);font-weight:500}
-.dl .rec{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);font-weight:500;height:16px}
-.fine{margin-top:26px;font-size:14px;color:var(--muted)}
-.fine a{color:var(--green)}
-
-footer{padding:56px 0 64px;text-align:center;color:var(--muted);font-size:14px}
-footer img{height:64px;width:auto;margin:0 auto 14px}
-footer .claim{letter-spacing:.42em;font-size:12.5px;color:var(--gold-2);font-weight:500;margin-bottom:18px}
-footer nav{position:static;background:none;backdrop-filter:none;border:0}
-footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
-footer .links a{color:var(--green);text-decoration:none}
-
-@media (max-width:900px){
-  .grid,.myth-grid{grid-template-columns:1fr 1fr}
-  .agents .wrap,.dramas .wrap{grid-template-columns:1fr}
-  .dramas .wrap{gap:40px}
-}
-@media (max-width:640px){
-  .wrap{padding:0 16px}
-  .navlinks a:not(.btn){display:none}
-  .brand span{font-size:17px;letter-spacing:.14em}
-  .brand img{height:34px}
-  .hero h1{letter-spacing:0}
-  .shot{margin-top:40px}
-  .grid,.myth-grid,.dl-grid{grid-template-columns:1fr}
-  .hero{padding-top:44px}
-  .hero .claim{letter-spacing:.28em;font-size:12px}
-  .myth,.tools,.agents,.download,.dramas{padding-top:72px;padding-bottom:72px}
-  .dramas{margin-top:72px}
+@media (max-width:520px){
+  .tiers{grid-template-columns:1fr}
+  .ranked .card .cap b{font-size:15px}
 }
 </style>
 </head>
 <body>
 
-<nav id="top">
-  <div class="wrap">
-    <a class="brand" href="#"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
-    <div class="navlinks">
-      <a href="microdramas">Microdramas</a>
-      <a href="#tools">Tools</a>
-      <a href="#agents">Agents</a>
-      <a href="https://github.com/LudwigKienle/ai-video-production-editor">GitHub</a>
-      <a class="btn btn-primary btn-sm" href="#download">Download</a>
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="/"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+    <nav class="tabs" aria-label="Main">
+      <a href="/" aria-current="page">Home</a>
+      <a href="#all">Series</a>
+      <a href="#plans">Plans</a>
+      <a href="about">About</a>
+    </nav>
+    <div class="end">
+      <span class="tier" id="tier">Free · with ads</span>
+      <a class="btn btn-spot btn-sm" href="#plans" id="go-premium">Go ad-free</a>
     </div>
   </div>
-</nav>
-
-<header class="hero wrap">
-  <img class="mark" src="assets/mark.png" alt="Buckswood logo: antlers, a smiling face and a golden arrow">
-  <p class="q">Ever searched for creative software that feels like a gift from the gods?</p>
-  <h1>BUCKSWOOD</h1>
-  <div class="rule"></div>
-  <div class="claim">MAKE EVERYONE HAPPY</div>
-  <p class="lede">The AI Video Production Editor that does everything you need to create art. Script, storyboard, generate, design sets, edit, grade, mix and deliver in one studio. Free and open source.</p>
-  <div class="cta">
-    <a class="btn btn-primary" href="#download" data-primary-dl>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12m0 0l-5-5m5 5l5-5M4 21h16"/></svg>
-      <span>Download it here</span>
-    </a>
-    <a class="btn btn-ghost" href="#tools">See every tool</a>
-  </div>
-  <div class="meta"><span data-version>v3.1.0</span> · macOS (Apple Silicon) &amp; Windows · GPL-3.0</div>
-  <div class="shot"><img src="assets/studio-moodboard.jpg" alt="The Buckswood moodboard workspace" width="1600" height="1000"></div>
 </header>
 
-<section class="dramas" id="microdramas">
-  <div class="wrap">
-    <div>
-      <div class="eyebrow">New · Buckswood Studios</div>
-      <h2>Original Microdramas.</h2>
-      <p>Two-minute episodes about betrayal, revenge and second chances, made with AI. 600k+ views on YouTube in the first three days. Watch free with ads, or go ad-free with Premium.</p>
-      <div class="cta-row">
-        <a class="btn btn-gold" href="watch">Watch now</a>
-        <a class="btn btn-line" href="microdramas">See the series &amp; the case</a>
+<section class="feature" aria-label="Featured series">
+  <div class="backdrop" id="f-backdrop"></div>
+  <div class="shell">
+    <div class="copy">
+      <div class="meta"><span class="badge" id="f-badge">New episode</span><span class="label" id="f-label"></span></div>
+      <h1 id="f-title"></h1>
+      <p class="hook" id="f-hook"></p>
+      <p class="log" id="f-log"></p>
+      <div class="tags" id="f-tags"></div>
+      <div class="acts">
+        <a class="btn btn-spot" id="f-play" href="watch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Play episode 1</span></a>
+        <a class="btn" id="f-latest" href="watch">Latest episode</a>
       </div>
+      <div class="picker" id="picker" aria-label="Choose a featured series"></div>
     </div>
-    <a class="posters" href="microdramas" aria-label="See the microdrama series">
-      <img src="assets/microdramas/cleaner1.jpg" alt="The New Cleaner" loading="lazy" width="540" height="960">
-      <img src="assets/microdramas/anniv1.jpg" alt="The Anniversary" loading="lazy" width="540" height="960">
-      <img src="assets/microdramas/jacket1.jpg" alt="The Worn Jacket" loading="lazy" width="540" height="960">
-    </a>
+    <div class="screen"><video id="f-video" muted loop playsinline preload="metadata"></video></div>
   </div>
 </section>
 
-<section class="myth">
-  <div class="wrap">
-    <div class="eyebrow">The idea behind the logo</div>
-    <h2>An arrow, a message, a smile.</h2>
-    <p class="myth-intro">Every creative project starts with a spark you can't quite explain. The Buckswood mark tells that story in three gestures.</p>
-    <div class="myth-grid">
-      <div><h3>Diana's arrow</h3><p>The goddess of the hunt sends the golden arrow: the idea that finds you. Buckswood is built to follow it from the first line of a script to the last frame.</p></div>
-      <div><h3>Hermes' message</h3><p>The messenger of the gods carries it home. In Buckswood every tool speaks to every other, and to your AI agents, so nothing gets lost between departments.</p></div>
-      <div><h3>Make everyone happy</h3><p>The smile is the goal: for the director, the editor, the sound designer, the client and the audience. One studio, nobody left out.</p></div>
-    </div>
-  </div>
-</section>
+<main class="shell">
+  <section class="row" id="continue" hidden>
+    <div class="row-head"><h2>Continue watching</h2></div>
+    <div class="rail" id="continue-rail"></div>
+  </section>
 
-<section class="tools" id="tools">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Everything in one studio</div>
-      <h2>From the first idea to the final deliver.</h2>
-      <p>Pages you already know from the big professional suites, rebuilt around AI and connected end to end. Bring your own model keys or run models locally.</p>
+  <section class="row">
+    <div class="row-head"><h2>Trending this week</h2><span class="label">Ranked by views</span></div>
+    <div class="ranked" id="ranked"></div>
+  </section>
+
+  <section class="row">
+    <div class="row-head"><h2>New episodes</h2><span class="label">A new episode every day</span></div>
+    <div class="rail" id="new-rail"></div>
+  </section>
+
+  <section class="row" id="all">
+    <div class="row-head"><h2>All series</h2><div class="filters" id="filters"></div></div>
+    <div class="grid" id="grid"></div>
+  </section>
+</main>
+
+<section class="plans" id="plans">
+  <div class="shell">
+    <div class="intro">
+      <span class="label">Plans</span>
+      <h2>Watch free, or watch without ads.</h2>
+      <p>Every episode is free with a short ad before it. Premium takes the ads away and opens new episodes a day early.</p>
     </div>
-    <div class="grid">
-      <article class="card"><span class="chip live">In 3.1</span>
-        <div class="stage">Create</div><h3>Script &amp; Story</h3>
-        <p>Write, improve and break down your script with a director that plans coverage scene by scene.</p>
-        <ul><li>Story bible, world, cast &amp; outfits</li><li>Research graph &amp; moodboards</li></ul></article>
-      <article class="card"><span class="chip live">In 3.1</span>
-        <div class="stage">Create</div><h3>Storyboard &amp; Generate</h3>
-        <p>Turn shots into images and video with the models you choose: FLUX.3, Nano Banana, Qwen Image, Krea, Kling, Veo and more.</p>
-        <ul><li>Node space for custom pipelines</li><li>Local models via Draw Things &amp; ComfyUI</li></ul></article>
-      <article class="card"><span class="chip live">In 3.1</span>
-        <div class="stage">Review</div><h3>Visual Continuity</h3>
-        <p>A vision model checks every frame against its neighbours: wardrobe, props, eyelines, the 180° rule, and returns a concrete fix.</p>
-        <ul><li>Automatic reverse angles</li><li>Comments &amp; approvals</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Design</div><h3>Set Design</h3>
-        <p>A Blender-style 3D workspace to block sets, place props and lights, and shoot reference frames for generation.</p>
-        <ul><li>Outliner, properties, viewport</li><li>Camera presets per shot</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Design</div><h3>Scene Map</h3>
-        <p>Plan blocking from above: actors, cameras, movement paths and the line of action, then turn it into a shot list.</p>
-        <ul><li>2D floor plan &amp; 3D preview</li><li>Animated camera moves</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Edit</div><h3>Edit &amp; Effects</h3>
-        <p>A Premiere-style timeline with a native OFX host and the Buckswood Post Plugins: Optics Lab lens presets, film emulation and grain.</p>
-        <ul><li>GPU lens &amp; film FX engine</li><li>Photo editor with the same plugins</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Color</div><h3>Color &amp; Compositing</h3>
-        <p>Grade with nodes and LUTs, composite in a node graph, and keep looks consistent across every generated shot.</p>
-        <ul><li>Film Look presets</li><li>Upscale &amp; relight</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Sound</div><h3>Sound</h3>
-        <p>Mix in the view you prefer: a Fairlight-style console, a Pro Tools-style edit window, or a compact creator view.</p>
-        <ul><li>Dialogue, music &amp; effects tracks</li><li>AI voice &amp; sound effects</li></ul></article>
-      <article class="card"><span class="chip">Coming next</span>
-        <div class="stage">Deliver</div><h3>Deliver</h3>
-        <p>Export from a render queue laid out like DaVinci Resolve or from a Premiere-style export dialog. Same engine, your habits.</p>
-        <ul><li>Presets for social, broadcast &amp; review</li><li>XML/EDL handoff</li></ul></article>
+    <div class="tiers">
+      <div class="plan">
+        <span class="label">Free</span>
+        <h3>With ads</h3>
+        <span class="price">€0</span>
+        <ul><li>Every episode of every series</li><li>Vote on what happens next</li><li class="minus">A short ad before each episode</li></ul>
+        <a class="btn" href="watch">Start watching</a>
+      </div>
+      <div class="plan premium">
+        <span class="label" style="color:var(--bucket)">Premium</span>
+        <h3>No ads</h3>
+        <span class="price">Price at launch · monthly, cancel anytime</span>
+        <ul><li>No ads, ever</li><li>New episodes a day early</li><li>Supports the next series</li></ul>
+        <a class="btn btn-spot" href="mailto:luikienle@gmail.com?subject=Buckswood%20Premium%20%E2%80%93%20notify%20me">Notify me at launch</a>
+      </div>
+      <p class="preview" id="preview">Premium opens soon. Preview: <button type="button" id="preview-toggle">see the site as a Premium member</button></p>
     </div>
   </div>
 </section>
 
-<section class="gallery">
-  <div class="wrap">
-    <div class="sec-head">
-      <div class="eyebrow">Take a look</div>
-      <h2>Real screens, no mockups.</h2>
-    </div>
-    <div class="tabs" role="tablist">
-      <button class="tab" role="tab" aria-selected="true" data-img="studio-script" data-cap="Script: write and break down your story with the AI director.">Script</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-storyboard" data-cap="Storyboard: every shot with its prompt, references and status.">Storyboard</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-image-gen" data-cap="Image generation with your choice of model.">Images</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-video-gen" data-cap="Video generation from storyboard frames.">Video</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-scene-map-3d" data-cap="Scene Map: blocking, cameras and movement in 3D.">Scene Map</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-set-design" data-cap="Set Design: build the location before you generate it.">Set Design</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-moodboard" data-cap="Moodboard: collect and research the look.">Moodboard</button>
-      <button class="tab" role="tab" aria-selected="false" data-img="studio-node-space-text-to-image" data-cap="Node space: build your own generation pipelines.">Nodes</button>
-    </div>
-    <div class="viewer"><img id="viewer" src="assets/studio-script.jpg" alt="Buckswood screen" width="1600" height="1000"></div>
-    <p class="caption" id="caption">Script: write and break down your story with the AI director.</p>
-  </div>
-</section>
-
-<section class="agents" id="agents">
-  <div class="wrap">
+<footer class="site">
+  <div class="shell">
     <div>
-      <div class="eyebrow">Hermes, built in</div>
-      <h2>Your AI agent can use every tool you can.</h2>
-      <p class="sec-head" style="color:var(--muted);font-size:19px;margin-top:16px">Buckswood runs a local MCP server and REST API. Connect Claude Code, Claude Desktop or Codex with one click in Settings, and the agent works on the same project you see, live.</p>
-      <ul>
-        <li>Script, cast, storyboard, generation and continuity review</li>
-        <li>Long batches run as background jobs you can cancel</li>
-        <li>Every agent action is listed in Settings</li>
-      </ul>
+      <a class="brand" href="/"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+      <p>Original microdramas made with AI by Buckswood Studios. All characters and stories are fictional.</p>
     </div>
-    <pre class="term"><span class="c"># in Claude Code, with Buckswood open</span>
-<span class="p">&gt;</span> Break scene 3 into shots, generate the
-  storyboard in 16:9 and check continuity.
-
-<span class="c">● project_director_scenes   scene 3 · 7 shots</span>
-<span class="c">● project_generate_shot_images   7/7 done</span>
-<span class="c">● project_review_continuity   2 fixes applied</span>
-
-Done. The storyboard is open in the studio.</pre>
-  </div>
-</section>
-
-<section class="download" id="download">
-  <div class="wrap">
-    <div class="eyebrow">Free &amp; open source</div>
-    <h2>Download it here.</h2>
-    <p class="sub">Install the desktop app, add your own AI provider keys or connect local models, and start creating.</p>
-    <div class="dl-grid">
-      <a class="dl" id="dl-mac" href="https://github.com/LudwigKienle/ai-video-production-editor/releases/latest/download/AI-Video-Production-Editor-macOS-arm64.dmg">
-        <div class="rec"></div>
-        <div class="os">macOS</div>
-        <div class="det">Apple Silicon · DMG · <span data-size="mac">463 MB</span></div>
-        <div class="go">Download for Mac →</div>
-      </a>
-      <a class="dl" id="dl-win" href="https://github.com/LudwigKienle/ai-video-production-editor/releases/latest/download/AI-Video-Production-Editor-Setup-Windows-x64.exe">
-        <div class="rec"></div>
-        <div class="os">Windows</div>
-        <div class="det">x64 · Installer · <span data-size="win">367 MB</span></div>
-        <div class="go">Download for Windows →</div>
-      </a>
-    </div>
-    <p class="fine">Latest release: <a data-release-link href="https://github.com/LudwigKienle/ai-video-production-editor/releases/latest"><span data-version>v3.1.0</span> release notes</a> · <a href="https://github.com/LudwigKienle/ai-video-production-editor/releases">All releases</a> · <a href="https://github.com/LudwigKienle/ai-video-production-editor">Source code</a><br>
-    The Windows installer is not code-signed yet. If SmartScreen asks, choose “More info” → “Run anyway”.</p>
-  </div>
-</section>
-
-<footer>
-  <div class="wrap">
-    <img src="assets/mark.png" alt="">
-    <div class="claim">MAKE EVERYONE HAPPY</div>
-    <div class="links">
-      <a href="microdramas">Microdramas</a>
-      <a href="https://github.com/LudwigKienle/ai-video-production-editor">GitHub</a>
-      <a href="https://github.com/LudwigKienle/ai-video-production-editor/releases">Releases</a>
-      <a href="https://github.com/LudwigKienle/ai-video-production-editor/blob/main/LICENSE">License (GPL-3.0)</a>
-    </div>
-    <div>Buckswood – AI Video Production Editor · made by Ludwig Maximillian Kienle</div>
+    <nav aria-label="Footer">
+      <a href="about">About &amp; partners</a>
+      <a href="https://www.youtube.com/@Buckswood-Studios">YouTube</a>
+      <a href="editor">AI Video Production Editor</a>
+    </nav>
   </div>
 </footer>
 
+<script src="assets/catalog.js"></script>
 <script>
 (function(){
-  var REPO='LudwigKienle/ai-video-production-editor';
-  var nav=document.getElementById('top');
-  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>8)},{passive:true});
-
-  // gallery tabs
-  var viewer=document.getElementById('viewer'),cap=document.getElementById('caption');
-  document.querySelectorAll('.tab').forEach(function(t){
-    t.addEventListener('click',function(){
-      document.querySelectorAll('.tab').forEach(function(o){o.setAttribute('aria-selected',o===t)});
-      viewer.style.opacity=0;
-      setTimeout(function(){viewer.src='assets/'+t.dataset.img+'.jpg';cap.textContent=t.dataset.cap;},180);
-    });
-  });
-  viewer.addEventListener('load',function(){viewer.style.opacity=1});
-
-  // recommend the right installer
-  var ua=navigator.userAgent||'',plat=(navigator.userAgentData&&navigator.userAgentData.platform)||navigator.platform||'';
-  var os=/win/i.test(plat)||/Windows/.test(ua)?'win':(/mac/i.test(plat)||/Mac OS X/.test(ua)?'mac':null);
-  if(os){
-    var card=document.getElementById('dl-'+os);
-    card.classList.add('recommended');
-    card.querySelector('.rec').textContent='Recommended for you';
-    var primary=document.querySelector('[data-primary-dl]');
-    primary.href=card.href;
-    primary.querySelector('span').textContent='Download it here · '+(os==='mac'?'macOS':'Windows');
+  var BW=window.BW,S=BW.series;
+  function img(src,alt){var i=document.createElement('img');i.src='assets/microdramas/'+src+'.jpg';i.alt=alt||'';i.loading='lazy';i.className='still';return i}
+  function card(href,poster,title,sub,badges){
+    var a=document.createElement('a');a.className='card reveal';a.href=href;
+    var f=document.createElement('div');f.className='frame';f.appendChild(img(poster,''));
+    if(badges&&badges.length){var tl=document.createElement('div');tl.className='tl';badges.forEach(function(b){var s=document.createElement('span');s.className='badge'+(b.cls?' '+b.cls:'');s.textContent=b.t;tl.appendChild(s)});f.appendChild(tl)}
+    var c=document.createElement('div');c.className='cap';var bt=document.createElement('b');bt.textContent=title;c.appendChild(bt);
+    if(sub){var sm=document.createElement('small');sm.textContent=sub;c.appendChild(sm)}
+    f.appendChild(c);a.appendChild(f);return a;
   }
+  function latest(s){return s.eps[s.eps.length-1]}
 
-  // live version and sizes from GitHub Releases
-  fetch('https://api.github.com/repos/'+REPO+'/releases/latest').then(function(r){return r.ok?r.json():null}).then(function(rel){
-    if(!rel||!rel.tag_name)return;
-    document.querySelectorAll('[data-version]').forEach(function(e){e.textContent=rel.tag_name});
-    document.querySelector('[data-release-link]').href=rel.html_url;
-    (rel.assets||[]).forEach(function(a){
-      var key=/macOS-arm64\.dmg$/.test(a.name)?'mac':(/Setup-Windows-x64\.exe$/.test(a.name)?'win':null);
-      if(key){var el=document.querySelector('[data-size="'+key+'"]');if(el)el.textContent=Math.round(a.size/1e6)+' MB';}
+  // ---- membership label
+  function renderTier(){
+    var p=BW.isPremium(),t=document.getElementById('tier');
+    t.textContent=p?'Premium · no ads':'Free · with ads';t.classList.toggle('premium',p);
+    document.getElementById('go-premium').hidden=p;
+    document.getElementById('preview-toggle').textContent=p?'switch back to Free':'see the site as a Premium member';
+  }
+  document.getElementById('preview-toggle').addEventListener('click',function(){BW.setPremium(!BW.isPremium());renderTier()});
+  renderTier();
+
+  // ---- featured banner
+  var cur=0,timer=null,video=document.getElementById('f-video'),picker=document.getElementById('picker');
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  S.forEach(function(s,i){
+    var b=document.createElement('button');b.type='button';
+    var r=document.createElement('span');r.className='ring';r.appendChild(img(s.cover,''));b.appendChild(r);
+    var n=document.createElement('span');n.className='name';n.textContent=s.title;b.appendChild(n);
+    b.addEventListener('click',function(){stop();show(i)});picker.appendChild(b);
+  });
+  function show(i){
+    cur=i;var s=S[i],last=latest(s);
+    document.getElementById('f-backdrop').style.backgroundImage='url(assets/microdramas/'+s.cover+'.jpg)';
+    document.getElementById('f-title').textContent=s.title;
+    document.getElementById('f-hook').textContent=s.hook;
+    document.getElementById('f-log').textContent=s.log;
+    document.getElementById('f-label').textContent=s.eps.length+(s.eps.length>1?' episodes':' episode')+' · #'+s.rank+' this week';
+    document.getElementById('f-badge').hidden=!last.isNew;
+    var tags=document.getElementById('f-tags');tags.textContent='';
+    s.tags.forEach(function(t){var c=document.createElement('span');c.className='chip';c.textContent=t;tags.appendChild(c)});
+    document.getElementById('f-play').href='watch#'+s.eps[0].id;
+    var l=document.getElementById('f-latest');l.href='watch#'+last.id;l.textContent=s.eps.length>1?'Latest: episode '+last.n:'Episode details';
+    l.hidden=s.eps.length<2;
+    video.poster='assets/microdramas/'+s.loop+'.jpg';video.src='assets/microdramas/'+s.loop+'.mp4';
+    if(!calm)video.play().catch(function(){});
+    picker.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-current',j===i);b.querySelector('img').classList.toggle('lit',j===i)});
+  }
+  function stop(){clearInterval(timer);timer=null}
+  show(0);
+  if(!calm)timer=setInterval(function(){show((cur+1)%S.length)},9000);
+
+  // ---- continue watching
+  var prog=BW.progress(),cont=document.getElementById('continue-rail'),any=false;
+  Object.keys(prog).filter(function(k){return k!=='_last'}).sort(function(a,b){return a===prog._last?-1:b===prog._last?1:0}).forEach(function(id){
+    var e=BW.find(id),p=prog[id];if(!e||!p.d||p.t>=p.d-3)return;
+    var c=card('watch#'+e.id,e.poster,e.series.title,'Episode '+e.n+' · '+Math.round(p.t/60)+' of '+Math.round(p.d/60)+' min',[{t:'EP '+e.n,cls:'ep'}]);
+    var bar=document.createElement('span');bar.className='bar';var i=document.createElement('i');i.style.width=Math.round(p.t/p.d*100)+'%';bar.appendChild(i);c.querySelector('.frame').appendChild(bar);
+    cont.appendChild(c);any=true;
+  });
+  document.getElementById('continue').hidden=!any;
+
+  // ---- trending, ranked
+  var ranked=document.getElementById('ranked');
+  S.slice().sort(function(a,b){return a.rank-b.rank}).forEach(function(s){
+    var c=card('watch#'+s.eps[0].id,s.cover,s.title,s.eps.length+(s.eps.length>1?' episodes':' episode'));
+    var n=document.createElement('span');n.className='num';n.setAttribute('aria-hidden','true');n.textContent=s.rank;
+    c.insertBefore(n,c.firstChild);c.setAttribute('aria-label','Number '+s.rank+': '+s.title);ranked.appendChild(c);
+  });
+
+  // ---- new episodes, newest first
+  var rail=document.getElementById('new-rail');
+  BW.playlist.slice().sort(function(a,b){return (b.isNew?1:0)-(a.isNew?1:0)}).forEach(function(e){
+    var b=[{t:'EP '+e.n,cls:'ep'}];if(e.isNew)b.push({t:'New'});
+    rail.appendChild(card('watch#'+e.id,e.poster,e.series.title,e.len,b));
+  });
+
+  // ---- all series with genre filter
+  var grid=document.getElementById('grid'),filters=document.getElementById('filters'),active='All';
+  ['All'].concat(BW.tags).forEach(function(t){
+    var b=document.createElement('button');b.type='button';b.className='chip';b.textContent=t;b.setAttribute('aria-pressed',t===active);
+    b.addEventListener('click',function(){active=t;filters.querySelectorAll('.chip').forEach(function(o){o.setAttribute('aria-pressed',o===b)});renderGrid()});
+    filters.appendChild(b);
+  });
+  function renderGrid(){
+    grid.textContent='';
+    S.filter(function(s){return active==='All'||s.tags.indexOf(active)>=0}).forEach(function(s){
+      var c=card('watch#'+s.eps[0].id,s.cover,s.title,null,latest(s).isNew?[{t:'New'}]:null);
+      var u=document.createElement('div');u.className='under';u.textContent=s.tags.join(' · ');c.appendChild(u);grid.appendChild(c);
     });
-  }).catch(function(){});
+  }
+  renderGrid();
 })();
 </script>
 </body>
