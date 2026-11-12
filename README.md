@@ -33,5 +33,5 @@ Local preview: any static server that maps `/watch` to `watch.html` (e.g. `npx s
 1. Create an AdSense account (adsense.google.com) for www.buckswood.art and wait for approval.
 2. Open Google Ad Manager (admanager.google.com) with the same Google account and link AdSense.
 3. Inventory → Ad units → new unit "buckswood-preroll", type video. Copy its VAST tag into `AD_TAG` in `watch.html`.
-4. Add `ads.txt` at the site root with the line Google shows you (`google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0`).
+4. `ads.txt` and the `google-adsense-account` meta tag are in place for publisher pub-2272299323344536 (AdSense, 2026-11-12).
 5. Privacy & messaging → create a European regulations (GDPR) message. Google's certified consent message then replaces `assets/consent.js`; keep the rule that the IMA SDK loads only after consent.

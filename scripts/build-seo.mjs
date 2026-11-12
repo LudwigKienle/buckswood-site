@@ -56,6 +56,7 @@ function page(s) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google-adsense-account" content="ca-pub-2272299323344536">
 <title>${esc(s.title)} – Watch the microdrama | Buckswood Studios</title>
 <meta name="description" content="${esc(desc)}">
 <meta name="theme-color" content="#0C0C0D">
