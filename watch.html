@@ -71,6 +71,9 @@ main.watch{max-width:1320px;margin:0 auto;padding:20px var(--gut-r) 0 var(--gut)
 .upsell{margin-top:30px;border-radius:18px;background:var(--film);padding:20px 22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;justify-content:space-between}
 .upsell p{margin:0;max-width:34ch;font-size:15px}
 body.is-premium .upsell{display:none}
+.legal-line{margin:34px 0 28px;font-size:13px;color:var(--ash)}
+.legal-line a{color:var(--ash);text-decoration:none}
+.legal-line a:hover{color:var(--paper)}
 
 /* up next */
 .next{position:absolute;left:14px;right:14px;bottom:76px;z-index:3;border-radius:16px;background:rgba(21,21,23,.92);backdrop-filter:blur(14px);padding:16px;display:none}
@@ -164,6 +167,7 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
     <div class="epgrid" id="epgrid"></div>
     <div class="upsell"><p><b>Watch without ads.</b> Premium removes every ad and opens new episodes a day early.</p><button class="btn btn-spot btn-sm" data-plans type="button">See Premium</button></div>
     <div class="more"><h3>More series</h3><div class="rail" id="more"></div></div>
+    <p class="legal-line"><a href="about">About</a> · <a href="impressum">Impressum</a></p>
   </div>
 </main>
 
