@@ -96,7 +96,7 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
 .plan li{margin:4px 0}
 .x{position:absolute;top:14px;right:14px;width:34px;height:34px;border-radius:50%;border:0;background:var(--grain);font-size:20px;cursor:pointer}
 .demo{text-align:center;font-size:13px;color:var(--ash);margin:16px 0 0}
-.demo button{background:none;border:0;padding:0;color:var(--paper);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.demo a{color:var(--paper)}
 
 @media (max-width:1080px){
   main.watch{grid-template-columns:auto auto;}
@@ -165,9 +165,9 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
     <div class="tags" id="s-tags"></div>
     <div class="eps-head" id="episodes"><h3>Episodes</h3><span class="label" id="s-count"></span></div>
     <div class="epgrid" id="epgrid"></div>
-    <div class="upsell"><p><b>Watch without ads.</b> Premium removes every ad and opens new episodes a day early.</p><button class="btn btn-spot btn-sm" data-plans type="button">See Premium</button></div>
+    <div class="upsell"><p><b>Watch without ads.</b> Premium removes every ad for €4.99 a month. Cancel any time.</p><button class="btn btn-spot btn-sm" data-plans type="button">See Premium</button></div>
     <div class="more"><h3>More series</h3><div class="rail" id="more"></div></div>
-    <p class="legal-line"><a href="series/the-new-cleaner">The New Cleaner</a> · <a href="series/the-anniversary">The Anniversary</a> · <a href="series/the-worn-jacket">The Worn Jacket</a> · <a href="about">About</a> · <a href="impressum">Impressum</a> · <a href="datenschutz">Datenschutz</a> · <button type="button" class="linkish" data-consent>Cookie settings</button></p>
+    <p class="legal-line"><a href="series/the-new-cleaner">The New Cleaner</a> · <a href="series/the-anniversary">The Anniversary</a> · <a href="series/the-worn-jacket">The Worn Jacket</a> · <a href="about">About</a> · <a href="/agb">AGB</a> · <a href="/widerruf">Widerruf</a> · <a href="/kuendigen">Verträge hier kündigen</a> · <a href="impressum">Impressum</a> · <a href="datenschutz">Datenschutz</a> · <button type="button" class="linkish" data-consent>Cookie settings</button></p>
   </div>
 </main>
 
@@ -182,12 +182,12 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
       <button class="btn" data-close type="button">Keep watching free</button>
     </div>
     <div class="plan premium">
-      <span class="label" style="color:var(--bucket)">Premium</span><h3>No ads</h3><span class="price">Price at launch</span>
-      <ul><li>No ads, ever</li><li>New episodes a day early</li><li>Supports the next series</li></ul>
-      <a class="btn btn-spot" id="buy" href="mailto:luikienle@gmail.com?subject=Buckswood%20Premium%20%E2%80%93%20notify%20me">Notify me at launch</a>
+      <span class="label" style="color:var(--bucket)">Premium</span><h3>No ads</h3><span class="price">€4.99 / month · cancel anytime</span>
+      <ul><li>No ads, ever</li><li>Every series, every new episode</li><li>Supports the next series</li></ul>
+      <a class="btn btn-spot" id="buy" href="/premium">Go Premium</a>
     </div>
   </div>
-  <p class="demo">Preview: <button id="demo-toggle" type="button">see the site as a Premium member</button></p>
+  <p class="demo" id="plan-msg" role="status">Payment through Stripe · <a href="/agb">Terms</a> · <a href="/widerruf">Withdrawal</a> · <a href="/kuendigen">Verträge hier kündigen</a></p>
 </dialog>
 
 <script src="/assets/consent.js"></script>
@@ -199,25 +199,25 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
   // developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/tags
   // Replace it with the tag from your own Google Ad Manager ad unit before launch.
   var AD_TAG='https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=';
-  // Stripe Payment Link for the Premium subscription. Empty = "Notify me" mail link.
-  var STRIPE_LINK='';
   // One pre-roll before every Nth episode for free viewers.
   var AD_EVERY=1;
 
   var BW=window.BW,PLAYLIST=BW.playlist;
 
   // ---- membership ----------------------------------------------------------
-  // Prototype only: the flag lives in this browser. With accounts, the server
-  // decides who is Premium (Stripe webhook -> database) and the page asks it.
+  // Premium comes from the server (/api/me checks the Stripe subscription).
+  var buy=document.getElementById('buy');
   function renderTier(){
     var p=BW.isPremium();
     document.body.classList.toggle('is-premium',p);
     var t=document.getElementById('tier');t.textContent=p?'Premium · no ads':'Free · with ads';t.classList.toggle('premium',p);
     document.getElementById('go-premium').hidden=p;
     document.getElementById('act-premium').hidden=p;
-    document.getElementById('demo-toggle').textContent=p?'switch back to Free':'see the site as a Premium member';
+    buy.textContent=BW.canBuy()?'Go Premium':'Premium opens soon';
   }
-  if(STRIPE_LINK){var buy=document.getElementById('buy');buy.href=STRIPE_LINK;buy.textContent='Go Premium';}
+  buy.addEventListener('click',function(e){
+    if(BW.canBuy()){e.preventDefault();BW.checkout(buy,document.getElementById('plan-msg'))}
+  });
 
   // ---- elements ------------------------------------------------------------
   var stage=document.getElementById('stage'),video=document.getElementById('video'),adEl=document.getElementById('ad'),
@@ -279,6 +279,10 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
 
   function play(){
     cover.hidden=true;
+    // Wait for the membership check so Premium members never get an ad.
+    BW.membership().then(playNow);
+  }
+  function playNow(){
     // Ads load only after the viewer accepted them in the consent banner.
     var consent=window.BWConsent&&BWConsent.ads()===true;
     var needsAd=consent&&!BW.isPremium()&&(played%AD_EVERY===0);
@@ -400,13 +404,7 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
   dlg.querySelector('.x').addEventListener('click',closePlans);
   dlg.querySelector('[data-close]').addEventListener('click',closePlans);
   dlg.addEventListener('click',function(e){if(e.target===dlg)closePlans()});
-  document.getElementById('demo-toggle').addEventListener('click',function(){
-    BW.setPremium(!BW.isPremium());renderTier();
-    if(BW.isPremium()&&stage.classList.contains('ad'))endAd();
-    dlg.close();
-  });
-
-  renderTier();
+  BW.membership().then(renderTier);
   function fromHash(){var i=PLAYLIST.findIndex(function(e){return '#'+e.id===location.hash});return i}
   var start=fromHash();
   load(start<0?0:start,false);

@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google-adsense-account" content="ca-pub-2272299323344536">
+<title>Premium – Buckswood Studios</title>
+<meta name="description" content="Buckswood Premium: every microdrama episode without ads for €4.99 a month. Cancel anytime.">
+<meta name="theme-color" content="#0C0C0D">
+<link rel="canonical" href="https://www.buckswood.art/premium">
+<link rel="icon" type="image/png" href="/assets/mark.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/consent.css">
+<link rel="stylesheet" href="/assets/platform.css">
+<style>
+.legal{max-width:720px;padding-block:56px 24px}
+.legal h1{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-.035em}
+.legal .stand{color:var(--ash);margin:10px 0 0}
+.legal h2{font-size:21px;font-weight:600;margin:40px 0 10px}
+.legal p,.legal li{color:var(--paper)}
+.legal p{margin:0}
+.legal p+p{margin-top:10px}
+.legal ul,.legal ol{margin:10px 0 0;padding-left:20px;display:grid;gap:6px}
+.legal a{color:var(--paper);text-underline-offset:3px}
+.legal a:hover{color:var(--bucket)}
+.legal .box{margin-top:14px;border:1px solid var(--grain);border-radius:14px;padding:18px 20px;background:var(--film)}
+
+.prem{max-width:620px;padding-block:64px 24px}
+.prem h1{font-size:clamp(40px,6vw,64px);font-weight:700;letter-spacing:-.035em;line-height:1.02}
+.prem .lead{font-size:19px;color:var(--ash);margin:14px 0 0;max-width:46ch}
+.price{display:flex;align-items:baseline;gap:8px;margin-top:28px}
+.price b{font-size:44px;font-weight:700;letter-spacing:-.03em}
+.price span{color:var(--ash)}
+.perks{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px}
+.perks li{display:flex;gap:12px;align-items:baseline}
+.perks li::before{content:"";flex:none;width:7px;height:7px;border-radius:50%;background:var(--bucket);transform:translateY(-2px)}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.state{margin-top:28px;border-radius:18px;padding:20px 22px;background:var(--film);border:1px solid var(--grain)}
+.state.ok{border-color:var(--bucket)}
+.state h2{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.state p{margin:8px 0 0;color:var(--ash)}
+.msg{margin-top:14px;color:var(--bucket);min-height:1.4em}
+.small{font-size:14px;color:var(--ash);margin-top:28px;max-width:56ch}
+.small a{color:var(--paper)}
+.small button{background:none;border:0;padding:0;color:var(--paper);text-decoration:underline;text-underline-offset:3px;cursor:pointer;font:inherit}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="/"><img src="/assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+    <nav class="tabs" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/#all">Series</a>
+      <a href="/#plans">Plans</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="end"><a class="btn btn-spot btn-sm" href="/watch">Watch now</a></div>
+  </div>
+</header>
+
+<main class="shell">
+  <section class="prem">
+    <span class="label" style="color:var(--bucket)">Premium</span>
+    <h1>Every episode. No ads.</h1>
+    <p class="lead">Watch every Buckswood microdrama without a single ad. You support the next series, and you can cancel any time.</p>
+    <div class="price"><b>€4.99</b><span>per month · cancel anytime</span></div>
+    <ul class="perks">
+      <li>No ads before any episode</li>
+      <li>Every series, every new episode</li>
+      <li>Monthly, cancel in two clicks</li>
+    </ul>
+
+    <div class="state" id="state" hidden></div>
+    <div class="acts" id="acts">
+      <button class="btn btn-spot" type="button" id="buy">Go Premium</button>
+      <a class="btn" href="/watch">Keep watching free</a>
+    </div>
+    <p class="msg" id="msg" role="status"></p>
+
+    <p class="small">Payment runs through Stripe. Premium is linked to the browser you pay in. To use it on another device, write to <a href="mailto:luikienle@gmail.com">luikienle@gmail.com</a> with the email you paid with and we move it for you.
+    By subscribing you accept the <a href="/agb">terms</a> and the <a href="/widerruf">withdrawal policy</a>. To cancel without signing in: <a href="/kuendigen">Verträge hier kündigen</a>.</p>
+    <p class="small" id="signout" hidden><button type="button" id="signout-btn">Remove Premium from this browser</button></p>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="shell">
+    <div>
+      <a class="brand" href="/"><img src="/assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+      <p>Original microdramas made with AI by Buckswood Studios. All characters and stories are fictional.</p>
+    </div>
+    <nav aria-label="Legal">
+      <a href="/premium">Premium</a>
+      <a href="/agb">AGB</a>
+      <a href="/widerruf">Widerruf</a>
+      <a href="/kuendigen">Verträge hier kündigen</a>
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <button type="button" class="linkish" data-consent>Cookie settings</button>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/consent.js"></script>
+<script src="/assets/catalog.js"></script>
+<script>
+(function(){
+  var buy=document.getElementById('buy'),msg=document.getElementById('msg'),state=document.getElementById('state'),acts=document.getElementById('acts');
+  function show(cls,title,text){state.hidden=false;state.className='state'+(cls?' '+cls:'');state.innerHTML='<h2></h2><p></p>';state.querySelector('h2').textContent=title;state.querySelector('p').textContent=text}
+  function member(){
+    show('ok','You are Premium','Every episode plays without ads in this browser.');
+    buy.textContent='Manage subscription';buy.onclick=function(){BW.portal(msg)};
+    document.getElementById('signout').hidden=false;
+  }
+  var params=new URLSearchParams(location.search),sid=params.get('session_id');
+  if(sid){
+    show('','Activating Premium…','This takes a second.');
+    fetch('/api/activate?session_id='+encodeURIComponent(sid),{credentials:'same-origin'}).then(function(r){return r.json()}).then(function(d){
+      history.replaceState(null,'','/premium');
+      if(d.premium){BW.membership(true).then(member)}
+      else show('','Payment not finished',d.error||'Please try again or write to us.');
+    }).catch(function(){show('','Could not check the payment','Please reload this page in a moment.')});
+  }else{
+    BW.membership().then(function(s){
+      if(s.premium)member();
+      else if(!s.checkout){buy.textContent='Notify me at launch';buy.onclick=function(){location.href='mailto:luikienle@gmail.com?subject=Buckswood%20Premium'};show('','Premium opens soon','Until then every episode is free with a short ad.')}
+      else buy.onclick=function(){BW.checkout(buy,msg)};
+    });
+  }
+  document.getElementById('signout-btn').addEventListener('click',function(){
+    fetch('/api/me',{method:'DELETE',credentials:'same-origin'}).then(function(){location.reload()});
+  });
+})();
+</script>
+</body>
+</html>

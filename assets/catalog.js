@@ -32,9 +32,33 @@ window.BW = (function(){
   var playlist=[];
   series.forEach(function(s){s.eps.forEach(function(e,i){e.series=s;e.n=i+1;e.id=e.file;playlist.push(e)})});
 
-  // Per-viewer conveniences only (watch progress, the Premium preview flag).
+  // Per-viewer convenience only (watch progress).
   function read(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){return null}}
   function write(k,v){try{v===null?localStorage.removeItem(k):localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+  write('bw-premium',null); // old preview flag, no longer used
+
+  // Premium comes from the server (/api/me checks the Stripe subscription).
+  var member={premium:false,checkout:false},pending=null;
+  function membership(force){
+    if(!pending||force){
+      pending=fetch('/api/me',{credentials:'same-origin'})
+        .then(function(r){return r.ok?r.json():{}})
+        .catch(function(){return {}})
+        .then(function(d){member.premium=!!d.premium;member.checkout=!!d.checkout;return member});
+    }
+    return pending;
+  }
+  function post(url,msg,label,btn){
+    if(btn){btn.disabled=true;btn.dataset.label=btn.textContent;btn.textContent=label}
+    if(msg)msg.textContent='';
+    return fetch(url,{method:'POST',credentials:'same-origin'})
+      .then(function(r){return r.json()})
+      .then(function(d){if(d.url){location.href=d.url;return}throw new Error(d.error||'')})
+      .catch(function(e){
+        if(btn){btn.disabled=false;btn.textContent=btn.dataset.label}
+        if(msg)msg.textContent=e.message||'That did not work. Please try again in a moment.';
+      });
+  }
 
   return {
     series:series,playlist:playlist,
@@ -42,7 +66,10 @@ window.BW = (function(){
     find:function(id){return playlist.filter(function(e){return e.id===id})[0]},
     progress:function(){return read('bw-progress')||{}},
     saveProgress:function(id,t,dur){var p=read('bw-progress')||{};p[id]={t:Math.floor(t),d:Math.floor(dur)};p._last=id;write('bw-progress',p)},
-    isPremium:function(){return read('bw-premium')===1},
-    setPremium:function(on){write('bw-premium',on?1:null)}
+    membership:membership,
+    isPremium:function(){return member.premium},
+    canBuy:function(){return member.checkout},
+    checkout:function(btn,msg){return post('/api/checkout',msg,'Opening checkout…',btn)},
+    portal:function(msg){return post('/api/portal',msg,'',null)}
   };
 })();

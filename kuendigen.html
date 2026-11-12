@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="google-adsense-account" content="ca-pub-2272299323344536">
+<title>Verträge hier kündigen – Buckswood Studios</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0C0C0D">
+<link rel="canonical" href="https://www.buckswood.art/kuendigen">
+<link rel="icon" type="image/png" href="/assets/mark.png">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/consent.css">
+<link rel="stylesheet" href="/assets/platform.css">
+<style>
+.legal{max-width:720px;padding-block:56px 24px}
+.legal h1{font-size:clamp(36px,5vw,52px);font-weight:700;letter-spacing:-.035em}
+.legal .stand{color:var(--ash);margin:10px 0 0}
+.legal h2{font-size:21px;font-weight:600;margin:40px 0 10px}
+.legal p,.legal li{color:var(--paper)}
+.legal p{margin:0}
+.legal p+p{margin-top:10px}
+.legal ul,.legal ol{margin:10px 0 0;padding-left:20px;display:grid;gap:6px}
+.legal a{color:var(--paper);text-underline-offset:3px}
+.legal a:hover{color:var(--bucket)}
+.legal .box{margin-top:14px;border:1px solid var(--grain);border-radius:14px;padding:18px 20px;background:var(--film)}
+
+.form{display:grid;gap:14px;max-width:460px;margin-top:22px}
+.form label{display:grid;gap:6px;font-size:14px;color:var(--ash)}
+.form input{font:inherit;font-size:16px;color:var(--paper);background:var(--film);border:1px solid var(--grain);border-radius:10px;padding:12px 14px}
+.form input:focus{outline:2px solid var(--bucket);outline-offset:1px}
+.done{margin-top:22px;border:1px solid var(--bucket);border-radius:14px;padding:18px 20px;background:var(--film)}
+.err{color:var(--bucket);margin-top:12px}
+
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="shell">
+    <a class="brand" href="/"><img src="/assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+    <nav class="tabs" aria-label="Main">
+      <a href="/">Home</a>
+      <a href="/#all">Series</a>
+      <a href="/#plans">Plans</a>
+      <a href="/about">About</a>
+    </nav>
+    <div class="end"><a class="btn btn-spot btn-sm" href="/watch">Watch now</a></div>
+  </div>
+</header>
+
+<main class="shell">
+  <article class="legal">
+    <h1>Verträge hier kündigen</h1>
+    <p class="stand">Kündigung deines Buckswood-Premium-Abos, ohne Anmeldung.</p>
+
+    <h2>Kündigung</h2>
+    <p>Gib die E-Mail-Adresse an, mit der du Premium gebucht hast. Das Abo endet zum Ende des bereits bezahlten Monats; bis dahin bleibt Premium aktiv. Es wird nichts mehr abgebucht.</p>
+    <form class="form" id="form" novalidate>
+      <label for="email">E-Mail-Adresse (Pflicht)
+        <input id="email" name="email" type="email" autocomplete="email" required>
+      </label>
+      <label for="name">Name (optional)
+        <input id="name" name="name" type="text" autocomplete="name">
+      </label>
+      <label for="when">Kündigen zum
+        <input id="when" name="when" type="text" value="nächstmöglichen Zeitpunkt" readonly>
+      </label>
+      <div><button class="btn btn-spot" type="submit" id="submit">Jetzt kündigen</button></div>
+      <p class="err" id="err" role="alert"></p>
+    </form>
+    <div class="done" id="done" hidden></div>
+
+    <h2>Andere Wege</h2>
+    <p>Du kannst auch auf <a href="/premium">Premium</a> „Manage subscription“ wählen oder eine E-Mail an <a href="mailto:luikienle@gmail.com">luikienle@gmail.com</a> schicken.</p>
+  </article>
+</main>
+
+<footer class="site">
+  <div class="shell">
+    <div>
+      <a class="brand" href="/"><img src="/assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+      <p>Original microdramas made with AI by Buckswood Studios. All characters and stories are fictional.</p>
+    </div>
+    <nav aria-label="Legal">
+      <a href="/premium">Premium</a>
+      <a href="/agb">AGB</a>
+      <a href="/widerruf">Widerruf</a>
+      <a href="/kuendigen">Verträge hier kündigen</a>
+      <a href="/impressum">Impressum</a>
+      <a href="/datenschutz">Datenschutz</a>
+      <button type="button" class="linkish" data-consent>Cookie settings</button>
+    </nav>
+  </div>
+</footer>
+<script src="/assets/consent.js"></script>
+<script>
+(function(){
+  var form=document.getElementById('form'),err=document.getElementById('err'),done=document.getElementById('done'),btn=document.getElementById('submit');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();err.textContent='';
+    var email=document.getElementById('email').value.trim();
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){err.textContent='Bitte gib eine gültige E-Mail-Adresse an.';return}
+    btn.disabled=true;btn.textContent='Wird gesendet…';
+    fetch('/api/cancel',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:email,name:document.getElementById('name').value.trim()})})
+      .then(function(r){return r.json().then(function(d){return {ok:r.ok,d:d}})})
+      .then(function(x){
+        if(!x.ok){err.textContent=x.d.error||'Das hat nicht geklappt. Bitte schreib an luikienle@gmail.com.';btn.disabled=false;btn.textContent='Jetzt kündigen';return}
+        var at=new Date(x.d.received).toLocaleString('de-DE');
+        var end=x.d.ends?new Date(x.d.ends).toLocaleDateString('de-DE'):null;
+        form.hidden=true;done.hidden=false;
+        done.innerHTML='<p><b>Deine Kündigung ist eingegangen.</b></p><p></p><p></p>';
+        var p=done.querySelectorAll('p');
+        p[1].textContent='Eingang: '+at+' · E-Mail: '+email;
+        p[2].textContent=end?'Dein Premium-Abo endet am '+end+'. Bis dahin bleibt Premium aktiv, danach wird nichts mehr abgebucht.':'Falls zu dieser E-Mail-Adresse ein Premium-Abo besteht, endet es zum Ende des bezahlten Monats. Bei Fragen schreib an luikienle@gmail.com.';
+      })
+      .catch(function(){err.textContent='Keine Verbindung. Bitte versuch es noch einmal oder schreib an luikienle@gmail.com.';btn.disabled=false;btn.textContent='Jetzt kündigen'});
+  });
+})();
+</script>
+</body>
+</html>

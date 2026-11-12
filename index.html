@@ -71,8 +71,8 @@
 .plan li::before{content:"";flex:none;width:6px;height:6px;margin-top:9px;border-radius:50%;background:var(--paper)}
 .plan li.minus::before{background:none;border:1px solid var(--ash)}
 .plan.premium li::before{background:var(--bucket)}
-.preview{grid-column:1/-1;font-size:13px;color:var(--ash)}
-.preview button{background:none;border:0;padding:0;color:var(--paper);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.plan-msg{grid-column:1/-1;font-size:13.5px;color:var(--ash);margin:0}
+.plan-msg a{color:var(--paper)}
 
 @media (max-width:860px){
   .feature .shell{grid-template-columns:1fr}
@@ -152,7 +152,7 @@
     <div class="intro">
       <span class="label">Plans</span>
       <h2>Watch free, or watch without ads.</h2>
-      <p>Every episode is free with a short ad before it. Premium takes the ads away and opens new episodes a day early.</p>
+      <p>Every episode is free with a short ad before it. Premium takes the ads away for €4.99 a month, and you can cancel any time.</p>
     </div>
     <div class="tiers">
       <div class="plan">
@@ -165,11 +165,11 @@
       <div class="plan premium">
         <span class="label" style="color:var(--bucket)">Premium</span>
         <h3>No ads</h3>
-        <span class="price">Price at launch · monthly, cancel anytime</span>
-        <ul><li>No ads, ever</li><li>New episodes a day early</li><li>Supports the next series</li></ul>
-        <a class="btn btn-spot" href="mailto:luikienle@gmail.com?subject=Buckswood%20Premium%20%E2%80%93%20notify%20me">Notify me at launch</a>
+        <span class="price">€4.99 / month · cancel anytime</span>
+        <ul><li>No ads, ever</li><li>Every series, every new episode</li><li>Supports the next series</li></ul>
+        <a class="btn btn-spot" href="/premium" id="buy">Go Premium</a>
       </div>
-      <p class="preview" id="preview">Premium opens soon. Preview: <button type="button" id="preview-toggle">see the site as a Premium member</button></p>
+      <p class="plan-msg" id="plan-msg" role="status">Payment through Stripe. <a href="/agb">Terms</a> · <a href="/widerruf">Withdrawal</a> · <a href="/kuendigen">Verträge hier kündigen</a></p>
     </div>
   </div>
 </section>
@@ -189,6 +189,9 @@
       <a href="about">About &amp; partners</a>
       <a href="https://www.youtube.com/@Buckswood-Studios">YouTube</a>
       <a href="editor">AI Video Production Editor</a>
+      <a href="/agb">AGB</a>
+      <a href="/widerruf">Widerruf</a>
+      <a href="/kuendigen">Verträge hier kündigen</a>
       <a href="impressum">Impressum</a>
       <a href="datenschutz">Datenschutz</a>
       <button type="button" class="linkish" data-consent>Cookie settings</button>
@@ -213,14 +216,18 @@
   function latest(s){return s.eps[s.eps.length-1]}
 
   // ---- membership label
+  var buy=document.getElementById('buy');
   function renderTier(){
     var p=BW.isPremium(),t=document.getElementById('tier');
     t.textContent=p?'Premium · no ads':'Free · with ads';t.classList.toggle('premium',p);
     document.getElementById('go-premium').hidden=p;
-    document.getElementById('preview-toggle').textContent=p?'switch back to Free':'see the site as a Premium member';
+    buy.textContent=p?'Manage Premium':(BW.canBuy()?'Go Premium':'Premium opens soon');
   }
-  document.getElementById('preview-toggle').addEventListener('click',function(){BW.setPremium(!BW.isPremium());renderTier()});
-  renderTier();
+  // Premium buttons start Stripe Checkout right away; everything else goes to /premium.
+  buy.addEventListener('click',function(e){
+    if(BW.canBuy()&&!BW.isPremium()){e.preventDefault();BW.checkout(buy,document.getElementById('plan-msg'))}
+  });
+  BW.membership().then(renderTier);
 
   // ---- featured banner
   var cur=0,timer=null,video=document.getElementById('f-video'),picker=document.getElementById('picker');

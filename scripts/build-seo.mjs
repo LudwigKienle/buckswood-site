@@ -154,6 +154,9 @@ ${others.map(o => `      <a class="card reveal" href="/series/${o.id}"><div clas
     <nav aria-label="Footer">
       <a href="/about">About &amp; partners</a>
       <a href="https://www.youtube.com/@Buckswood-Studios">YouTube</a>
+      <a href="/agb">AGB</a>
+      <a href="/widerruf">Widerruf</a>
+      <a href="/kuendigen">Verträge hier kündigen</a>
       <a href="/impressum">Impressum</a>
       <a href="/datenschutz">Datenschutz</a>
       <button type="button" class="linkish" data-consent>Cookie settings</button>
