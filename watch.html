@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Watch – Buckswood Studios Microdramas</title>
+<meta name="description" content="Watch Buckswood Studios original microdramas: free with ads, or ad-free with Premium.">
+<meta name="theme-color" content="#0E0D0B">
+<meta property="og:type" content="video.other">
+<meta property="og:url" content="https://buckswood.art/watch">
+<link rel="canonical" href="https://buckswood.art/watch">
+<meta property="og:title" content="Watch – Buckswood Studios Microdramas">
+<meta property="og:image" content="https://buckswood.art/assets/microdramas/banner.jpg">
+<link rel="icon" type="image/png" href="assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --void:#0E0D0B; --surface:#17150F; --raise:#1F1C15; --line:#2E2A21;
+  --body:#D8CFC0; --bright:#F6F1E7; --muted:#9C9384; --gold:#C9A45C;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
+  --nav:64px;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--void);color:var(--body);font-family:var(--sans);font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{display:block;max-width:100%}
+a{color:inherit}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--bright);line-height:1.1;margin:0}
+button{font:inherit}
+
+nav{position:sticky;top:0;z-index:20;height:var(--nav);background:rgba(14,13,11,.9);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .bar{max-width:1240px;margin:0 auto;padding:0 20px;height:100%;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.brand img{height:34px;width:auto}
+.brand span{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:.18em;color:var(--bright)}
+.right{display:flex;align-items:center;gap:12px}
+.tier{font-size:12px;letter-spacing:.16em;text-transform:uppercase;padding:6px 12px;border-radius:999px;border:1px solid var(--line);color:var(--muted);white-space:nowrap}
+.tier.premium{border-color:var(--gold);color:var(--gold)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:999px;padding:11px 20px;font-weight:500;font-size:15px;text-decoration:none;border:1.5px solid var(--gold);cursor:pointer;transition:background .15s,color .15s}
+.btn-primary{background:var(--gold);color:var(--void)}
+.btn-primary:hover{background:#D8B66E}
+.btn-ghost{background:none;color:var(--gold)}
+.btn-ghost:hover{background:var(--gold);color:var(--void)}
+.btn-sm{padding:7px 14px;font-size:14px}
+
+main{max-width:1240px;margin:0 auto;padding:20px;display:grid;grid-template-columns:auto 1fr;gap:36px;align-items:start}
+
+/* player */
+.stage{position:relative;height:calc(100vh - var(--nav) - 40px);height:calc(100svh - var(--nav) - 40px);max-height:1000px;min-height:480px;aspect-ratio:9/16;border-radius:16px;overflow:hidden;background:#000;box-shadow:0 30px 80px -30px rgba(0,0,0,.9),0 0 0 1px rgba(201,164,92,.15)}
+.stage video{width:100%;height:100%;object-fit:contain;background:#000}
+#ad{position:absolute;inset:0;display:none;z-index:3}
+.stage.ad #ad{display:block}
+.adbar{position:absolute;left:0;right:0;top:0;z-index:4;display:none;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;background:linear-gradient(180deg,rgba(0,0,0,.7),transparent);font-size:13.5px;color:var(--bright)}
+.stage.ad .adbar{display:flex}
+.adbar b{background:var(--gold);color:var(--void);border-radius:4px;padding:1px 7px;font-size:12px;letter-spacing:.06em;margin-right:8px}
+.adbar button{background:none;border:1px solid rgba(255,255,255,.4);color:var(--bright);border-radius:999px;padding:4px 12px;font-size:13px;cursor:pointer}
+.cover{position:absolute;inset:0;z-index:2;display:grid;place-items:center;background:#000 center/cover no-repeat;cursor:pointer;border:0;padding:0;width:100%}
+.cover::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.65))}
+.cover span{position:relative;width:84px;height:84px;border-radius:50%;background:rgba(14,13,11,.55);border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold)}
+.cover svg{width:32px;height:32px;margin-left:5px}
+.cover[hidden]{display:none}
+.nav-ep{position:absolute;right:12px;z-index:2;width:42px;height:42px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(14,13,11,.55);color:var(--bright);cursor:pointer;display:grid;place-items:center}
+.nav-ep svg{width:20px;height:20px}
+.nav-ep.up{top:calc(50% - 50px)}.nav-ep.down{top:calc(50% + 8px)}
+.nav-ep:disabled{opacity:.25;cursor:default}
+.stage.ad .nav-ep{display:none}
+.next{position:absolute;left:16px;right:16px;bottom:84px;z-index:3;background:rgba(14,13,11,.92);border:1px solid var(--line);border-radius:14px;padding:16px 18px;display:none}
+.next.show{display:block}
+.next small{color:var(--muted);letter-spacing:.14em;text-transform:uppercase;font-size:11.5px}
+.next h3{font-size:22px;margin:4px 0 12px}
+.next .row{display:flex;gap:10px}
+
+/* side */
+.side{padding-top:8px;min-width:0}
+.eyebrow{font-weight:500;letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--gold)}
+.side h1{font-size:clamp(34px,3.6vw,48px);margin:8px 0 6px}
+.side .eptitle{font-family:var(--serif);font-style:italic;font-size:22px;color:var(--body);margin:0 0 14px}
+.side .log{color:var(--muted);margin:0;max-width:560px}
+.series{margin-top:34px}
+.series h2{font-size:24px;margin:22px 0 10px}
+.list{display:flex;gap:12px;overflow-x:auto;padding-bottom:6px;scrollbar-width:thin}
+.item{flex:0 0 112px;text-align:left;background:none;border:0;padding:0;color:var(--body);cursor:pointer}
+.item .th{position:relative;aspect-ratio:9/16;border-radius:10px;overflow:hidden;border:1.5px solid var(--line);background:#000}
+.item img{width:100%;height:100%;object-fit:cover}
+.item[aria-current=true] .th{border-color:var(--gold)}
+.item .lbl{display:block;margin-top:6px;font-size:13.5px}
+.item .lbl small{color:var(--muted)}
+.item .badge{position:absolute;left:6px;top:6px;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;background:var(--gold);color:var(--void);border-radius:4px;padding:1px 6px}
+
+.upsell{margin-top:40px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 24px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+.upsell p{margin:0;max-width:420px}
+.upsell b{color:var(--bright)}
+body.is-premium .upsell{display:none}
+
+/* plans dialog */
+dialog{border:1px solid var(--line);border-radius:20px;background:var(--surface);color:var(--body);padding:30px;max-width:min(760px,94vw);width:100%}
+dialog::backdrop{background:rgba(5,5,4,.82);backdrop-filter:blur(4px)}
+dialog h2{font-size:34px;text-align:center}
+dialog .sub{text-align:center;color:var(--muted);margin:8px 0 24px}
+.plans{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.plan{border:1.5px solid var(--line);border-radius:16px;padding:22px;background:var(--void);display:flex;flex-direction:column}
+.plan.premium{border-color:var(--gold)}
+.plan .t{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.plan h3{font-size:30px;margin:6px 0 2px}
+.plan .price{font-family:var(--serif);font-size:22px;color:var(--bright)}
+.plan ul{padding-left:18px;margin:14px 0 20px;flex:1;font-size:15px}
+.plan li{margin:5px 0}
+.demo{margin-top:18px;text-align:center;font-size:13.5px;color:var(--muted)}
+.demo button{background:none;border:0;color:var(--gold);text-decoration:underline;cursor:pointer;padding:0}
+.x{position:absolute;top:14px;right:14px;width:38px;height:38px;border-radius:50%;border:1px solid var(--line);background:var(--void);color:var(--bright);font-size:22px;cursor:pointer}
+
+@media (max-width:860px){
+  main{grid-template-columns:1fr;padding:0 0 32px;gap:22px}
+  .stage{width:100%;height:auto;min-height:0;max-height:calc(100svh - var(--nav));aspect-ratio:9/16;margin:0 auto;border-radius:0}
+  .side{padding:0 16px}
+  .tier{display:none}
+  .plans{grid-template-columns:1fr}
+  dialog{padding:24px 18px}
+}
+@media (max-width:420px){.brand span{display:none}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="bar">
+    <a class="brand" href="/microdramas"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+    <div class="right">
+      <span class="tier" id="tier">Free · with ads</span>
+      <button class="btn btn-primary btn-sm" id="go-premium" data-plans>Go ad-free</button>
+    </div>
+  </div>
+</nav>
+
+<main>
+  <div class="stage" id="stage">
+    <video id="video" playsinline preload="metadata"></video>
+    <div id="ad"></div>
+    <div class="adbar"><span><b>AD</b><span id="ad-left">Your episode starts after this ad</span></span><button data-plans>Go ad-free</button></div>
+    <button class="cover" id="cover" aria-label="Play episode"><span><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span></button>
+    <button class="nav-ep up" id="prev" aria-label="Previous episode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 15l6-6 6 6"/></svg></button>
+    <button class="nav-ep down" id="next" aria-label="Next episode"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></button>
+    <div class="next" id="upnext">
+      <small>Up next in <span id="count">5</span></small>
+      <h3 id="next-title"></h3>
+      <div class="row"><button class="btn btn-primary btn-sm" id="next-now">Play now</button><button class="btn btn-ghost btn-sm" id="next-cancel">Cancel</button></div>
+    </div>
+  </div>
+
+  <div class="side">
+    <div class="eyebrow" id="ep-label"></div>
+    <h1 id="ep-series"></h1>
+    <p class="eptitle" id="ep-title"></p>
+    <p class="log" id="ep-log"></p>
+    <div class="series" id="series"></div>
+    <div class="upsell">
+      <p><b>Watch without ads.</b> Premium removes every ad and gets you new episodes a day early.</p>
+      <button class="btn btn-primary" data-plans>See Premium</button>
+    </div>
+  </div>
+</main>
+
+<dialog id="plans" aria-label="Plans">
+  <button class="x" aria-label="Close">×</button>
+  <h2>Watch free, or watch without ads.</h2>
+  <p class="sub">Every episode is free with a short ad before it. Premium takes the ads away.</p>
+  <div class="plans">
+    <div class="plan">
+      <div class="t">Free</div><h3>With ads</h3><div class="price">€0</div>
+      <ul><li>Every episode of every series</li><li>A short ad before each episode</li><li>Vote on what happens next</li></ul>
+      <button class="btn btn-ghost" data-close>Keep watching free</button>
+    </div>
+    <div class="plan premium">
+      <div class="t">Premium</div><h3>No ads</h3><div class="price">Price at launch</div>
+      <ul><li>No ads, ever</li><li>New episodes a day early</li><li>Supports the next series</li></ul>
+      <a class="btn btn-primary" id="buy" href="mailto:luikienle@gmail.com?subject=Buckswood%20Premium%20%E2%80%93%20notify%20me">Notify me at launch</a>
+    </div>
+  </div>
+  <p class="demo" id="demo">Preview: <button id="demo-toggle">see the site as a Premium member</button></p>
+</dialog>
+
+<script>
+(function(){
+  // ---- configuration -------------------------------------------------------
+  // VAST ad tag. This is Google's public IMA sample tag (a skippable pre-roll):
+  // developers.google.com/interactive-media-ads/docs/sdks/html5/client-side/tags
+  // Replace it with the tag from your own Google Ad Manager ad unit before launch.
+  var AD_TAG='https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/single_preroll_skippable&sz=640x480&ciu_szs=300x250%2C728x90&gdfp_req=1&output=vast&unviewed_position_start=1&env=vp&correlator=';
+  // Stripe Payment Link for the Premium subscription. Empty = "Notify me" mail link.
+  var STRIPE_LINK='';
+  // One pre-roll before every Nth episode for free viewers.
+  var AD_EVERY=1;
+
+  var SERIES=[
+    {id:'the-new-cleaner',title:'The New Cleaner',log:'On her first day, the new cleaner gets kicked, mocked and told she\'s "done by lunch" by people who have no idea she just bought the company.',eps:[
+      {file:'the-new-cleaner-1',poster:'cleaner1',title:'They humiliated the cleaner. She owns the company.',len:'2:04'},
+      {file:'the-new-cleaner-2',poster:'cleaner2',title:'She fired him with one sentence: "You\'re done by lunch."',len:'1:17'},
+      {file:'the-new-cleaner-3',poster:'cleaner3',title:'He offered half what she paid. She said one word.',len:'1:15',isNew:true}]},
+    {id:'the-anniversary',title:'The Anniversary',log:'On their 15th anniversary he hands his wife divorce papers in front of the whole restaurant. He keeps the house and the accounts. Or so he thinks.',eps:[
+      {file:'the-anniversary-1',poster:'anniv1',title:'Divorce papers at dinner. Then his card got declined.',len:'2:05'}]},
+    {id:'the-worn-jacket',title:'The Worn Jacket',log:'A 71-year-old man in a worn work jacket walks into a luxury car dealership to buy his granddaughter a car. They show him the door. Then the regional director walks in.',eps:[
+      {file:'the-worn-jacket-1',poster:'jacket1',title:'They mocked his old jacket. He owns the whole dealership.',len:'1:48',isNew:true}]}
+  ];
+  var PLAYLIST=[];
+  SERIES.forEach(function(s){s.eps.forEach(function(e,i){e.series=s;e.n=i+1;e.id=e.file;PLAYLIST.push(e)})});
+
+  // ---- membership ----------------------------------------------------------
+  // Prototype only: the flag lives in this browser. With accounts, the server
+  // decides who is Premium (Stripe webhook -> database) and the page asks it.
+  function store(k,v){try{if(v===undefined)return localStorage.getItem(k);v===null?localStorage.removeItem(k):localStorage.setItem(k,v)}catch(e){return null}}
+  function isPremium(){return store('bw-premium')==='1'}
+  function renderTier(){
+    var p=isPremium();
+    document.body.classList.toggle('is-premium',p);
+    var t=document.getElementById('tier');t.textContent=p?'Premium · no ads':'Free · with ads';t.classList.toggle('premium',p);
+    document.getElementById('go-premium').hidden=p;
+    document.getElementById('demo-toggle').textContent=p?'switch back to Free':'see the site as a Premium member';
+  }
+  if(STRIPE_LINK){var buy=document.getElementById('buy');buy.href=STRIPE_LINK;buy.textContent='Go Premium';}
+
+  // ---- elements ------------------------------------------------------------
+  var stage=document.getElementById('stage'),video=document.getElementById('video'),adEl=document.getElementById('ad'),
+      cover=document.getElementById('cover'),upnext=document.getElementById('upnext'),dlg=document.getElementById('plans');
+  var cur=0,started=false,played=0,countdown=null;
+
+  function load(i,autoplay){
+    cur=Math.max(0,Math.min(PLAYLIST.length-1,i));
+    var e=PLAYLIST[cur];
+    clearCountdown();
+    video.removeAttribute('controls');
+    video.src='media/episodes/'+e.file+'.mp4';
+    video.poster='assets/microdramas/'+e.poster+'.jpg';
+    cover.style.backgroundImage='url(assets/microdramas/'+e.poster+'.jpg)';
+    cover.hidden=!!autoplay;
+    document.getElementById('ep-label').textContent=e.series.title+' · Episode '+e.n;
+    document.getElementById('ep-series').textContent=e.series.title;
+    document.getElementById('ep-title').textContent=e.title;
+    document.getElementById('ep-log').textContent=e.series.log;
+    document.getElementById('prev').disabled=cur===0;
+    document.getElementById('next').disabled=cur===PLAYLIST.length-1;
+    document.querySelectorAll('.item').forEach(function(b){b.setAttribute('aria-current',b.dataset.id===e.id)});
+    history.replaceState(null,'','#'+e.id);
+    if(autoplay)play();
+  }
+
+  function play(){
+    cover.hidden=true;
+    var needsAd=!isPremium()&&(played%AD_EVERY===0);
+    played++;
+    if(needsAd)playAd(startContent);else startContent();
+  }
+  function startContent(){
+    stage.classList.remove('ad');
+    video.setAttribute('controls','');
+    video.play().catch(function(){cover.hidden=false});
+  }
+
+  // ---- ads (Google IMA SDK, loaded only when a free viewer presses play) ----
+  var ima=null,adc=null,loader=null,mgr=null,adDone=null;
+  function loadIma(){
+    if(ima)return ima;
+    ima=new Promise(function(res,rej){
+      if(window.google&&google.ima)return res();
+      var s=document.createElement('script');s.src='https://imasdk.googleapis.com/js/sdkloader/ima3.js';
+      s.onload=function(){window.google&&google.ima?res():rej()};s.onerror=rej;document.head.appendChild(s);
+      setTimeout(rej,5000);
+    });
+    ima.catch(function(){ima=null});
+    return ima;
+  }
+  function size(){return {w:stage.clientWidth,h:stage.clientHeight}}
+  function endAd(){
+    if(mgr){try{mgr.destroy()}catch(e){}mgr=null}
+    var f=adDone;adDone=null;if(f)f();
+  }
+  function playAd(done){
+    adDone=done;
+    // Any failure (blocked, no fill, timeout) falls through to the episode.
+    var guard=setTimeout(function(){if(adDone&&!stage.classList.contains('ad'))endAd()},6000);
+    loadIma().then(function(){
+      if(!adc){
+        adc=new google.ima.AdDisplayContainer(adEl,video);
+        loader=new google.ima.AdsLoader(adc);
+        loader.addEventListener(google.ima.AdsManagerLoadedEvent.Type.ADS_MANAGER_LOADED,function(ev){
+          var rs=new google.ima.AdsRenderingSettings();rs.restoreCustomPlaybackStateOnAdBreakComplete=true;
+          mgr=ev.getAdsManager(video,rs);
+          var T=google.ima.AdEvent.Type;
+          mgr.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,endAd);
+          mgr.addEventListener(T.CONTENT_PAUSE_REQUESTED,function(){clearTimeout(guard);video.pause();video.removeAttribute('controls');stage.classList.add('ad')});
+          mgr.addEventListener(T.CONTENT_RESUME_REQUESTED,endAd);
+          mgr.addEventListener(T.ALL_ADS_COMPLETED,endAd);
+          mgr.addEventListener(T.SKIPPED,endAd);
+          try{var s=size();mgr.init(s.w,s.h,google.ima.ViewMode.NORMAL);mgr.start()}catch(e){endAd()}
+        });
+        loader.addEventListener(google.ima.AdErrorEvent.Type.AD_ERROR,endAd);
+      }
+      adc.initialize();
+      var s=size(),req=new google.ima.AdsRequest();
+      req.adTagUrl=AD_TAG+Date.now();
+      req.linearAdSlotWidth=s.w;req.linearAdSlotHeight=s.h;
+      req.nonLinearAdSlotWidth=s.w;req.nonLinearAdSlotHeight=Math.round(s.h/3);
+      loader.requestAds(req);
+    }).catch(function(){clearTimeout(guard);endAd()});
+  }
+  addEventListener('resize',function(){if(mgr){var s=size();mgr.resize(s.w,s.h,google.ima.ViewMode.NORMAL)}});
+
+  // ---- up next ---------------------------------------------------------------
+  function clearCountdown(){clearInterval(countdown);countdown=null;upnext.classList.remove('show')}
+  video.addEventListener('ended',function(){
+    if(stage.classList.contains('ad'))return;
+    if(loader)loader.contentComplete();
+    if(cur>=PLAYLIST.length-1)return;
+    var n=PLAYLIST[cur+1],left=5;
+    document.getElementById('next-title').textContent=n.series.title+' · Ep. '+n.n;
+    document.getElementById('count').textContent=left;
+    upnext.classList.add('show');
+    countdown=setInterval(function(){
+      left--;document.getElementById('count').textContent=left;
+      if(left<=0)load(cur+1,true);
+    },1000);
+  });
+  document.getElementById('next-now').addEventListener('click',function(){load(cur+1,true)});
+  document.getElementById('next-cancel').addEventListener('click',clearCountdown);
+
+  // ---- episode list ----------------------------------------------------------
+  var box=document.getElementById('series');
+  SERIES.forEach(function(s){
+    var h=document.createElement('h2');h.textContent=s.title;box.appendChild(h);
+    var list=document.createElement('div');list.className='list';
+    s.eps.forEach(function(e){
+      var b=document.createElement('button');b.className='item';b.dataset.id=e.id;
+      b.innerHTML='<span class="th"><img loading="lazy" alt=""></span><span class="lbl">Episode '+e.n+' <small>· '+e.len+'</small></span>';
+      b.querySelector('img').src='assets/microdramas/'+e.poster+'.jpg';
+      if(e.isNew){var t=document.createElement('span');t.className='badge';t.textContent='New';b.querySelector('.th').appendChild(t)}
+      b.addEventListener('click',function(){load(PLAYLIST.indexOf(e),started);if(!started){started=true;play()}});
+      list.appendChild(b);
+    });
+    box.appendChild(list);
+  });
+
+  // ---- controls --------------------------------------------------------------
+  cover.addEventListener('click',function(){started=true;play()});
+  document.getElementById('prev').addEventListener('click',function(){load(cur-1,started)});
+  document.getElementById('next').addEventListener('click',function(){load(cur+1,started)});
+  addEventListener('keydown',function(e){
+    if(dlg.open||stage.classList.contains('ad'))return;
+    if(e.key==='ArrowDown'){e.preventDefault();load(cur+1,started)}
+    if(e.key==='ArrowUp'){e.preventDefault();load(cur-1,started)}
+  });
+  var y0=null;
+  stage.addEventListener('touchstart',function(e){y0=e.touches[0].clientY},{passive:true});
+  stage.addEventListener('touchend',function(e){
+    if(y0===null||stage.classList.contains('ad'))return;
+    var dy=e.changedTouches[0].clientY-y0;y0=null;
+    if(Math.abs(dy)>70)load(cur+(dy<0?1:-1),started);
+  },{passive:true});
+
+  // ---- plans dialog ----------------------------------------------------------
+  document.querySelectorAll('[data-plans]').forEach(function(b){b.addEventListener('click',function(){
+    if(mgr)try{mgr.pause()}catch(e){}
+    if(!video.paused)video.pause();
+    dlg.showModal();
+  })});
+  function closePlans(){dlg.close();if(mgr)try{mgr.resume()}catch(e){}}
+  dlg.querySelector('.x').addEventListener('click',closePlans);
+  dlg.querySelector('[data-close]').addEventListener('click',closePlans);
+  dlg.addEventListener('click',function(e){if(e.target===dlg)closePlans()});
+  document.getElementById('demo-toggle').addEventListener('click',function(){
+    store('bw-premium',isPremium()?null:'1');renderTier();
+    if(isPremium()&&stage.classList.contains('ad'))endAd();
+    dlg.close();
+  });
+
+  renderTier();
+  var start=PLAYLIST.findIndex(function(e){return '#'+e.id===location.hash});
+  load(start<0?0:start,false);
+  if(location.hash==='#premium')dlg.showModal();
+})();
+</script>
+</body>
+</html>

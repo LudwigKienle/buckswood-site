@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buckswood Studios – Original Microdramas</title>
+<meta name="description" content="Two-minute episodes about betrayal, revenge and second chances. Original microdramas made with AI by Buckswood Studios: 600k+ views in the first three days.">
+<meta name="theme-color" content="#0E0D0B">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buckswood.art/microdramas">
+<link rel="canonical" href="https://buckswood.art/microdramas">
+<meta property="og:title" content="Buckswood Studios – Original Microdramas">
+<meta property="og:description" content="Betrayal, revenge & second chances. Two-minute episodes, made with AI.">
+<meta property="og:image" content="https://buckswood.art/assets/microdramas/banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"CreativeWorkSeries","name":"Buckswood Studios – Original Microdramas","url":"https://buckswood.art/microdramas","genre":"Drama","inLanguage":"en","productionCompany":{"@type":"Organization","name":"Buckswood Studios","founder":{"@type":"Person","name":"Ludwig Maximillian Kienle"}},"sameAs":["https://www.youtube.com/@Buckswood-Studios"]}
+</script>
+<style>
+:root{
+  --void:#0E0D0B; --surface:#17150F; --raise:#1F1C15; --line:#2E2A21;
+  --body:#D8CFC0; --bright:#F6F1E7; --muted:#9C9384; --gold:#C9A45C; --gold-2:#A8823C;
+  --serif:"Cormorant Garamond",Georgia,serif; --sans:"Jost",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--void);color:var(--body);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 24px}
+.eyebrow{font-weight:500;letter-spacing:.32em;text-transform:uppercase;font-size:12.5px;color:var(--gold)}
+h1,h2,h3{font-family:var(--serif);font-weight:600;color:var(--bright);line-height:1.08;margin:0}
+h2{font-size:clamp(34px,4.6vw,54px)}
+h3{font-size:28px}
+section{scroll-margin-top:80px}
+.sec-head{max-width:760px}
+.sec-head p{color:var(--muted);font-size:19px;margin:16px 0 0}
+
+/* nav */
+nav{position:sticky;top:0;z-index:20;background:rgba(14,13,11,.82);backdrop-filter:saturate(1.2) blur(10px);border-bottom:1px solid transparent;transition:border-color .2s}
+nav.scrolled{border-bottom-color:var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:12px;text-decoration:none}
+.brand img{height:40px;width:auto}
+.brand span{font-family:var(--serif);font-weight:600;font-size:23px;letter-spacing:.2em;color:var(--bright)}
+.navlinks{display:flex;gap:28px;align-items:center;font-size:15px}
+.navlinks a{text-decoration:none;color:var(--muted)}
+.navlinks a:hover{color:var(--bright)}
+.navlinks a.btn-primary{color:var(--void)}
+.btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;font:inherit;font-weight:500;font-size:16px;text-decoration:none;border:1.5px solid var(--gold);cursor:pointer;transition:transform .15s,background .15s,color .15s}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--gold);color:var(--void)}
+.btn-primary:hover{background:#D8B66E}
+.btn-ghost{background:none;color:var(--gold)}
+.btn-ghost:hover{background:var(--gold);color:var(--void)}
+.btn-sm{padding:9px 18px;font-size:14px}
+.btn svg{width:18px;height:18px}
+
+/* hero */
+.hero{position:relative;min-height:min(86vh,860px);display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line)}
+.strips{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;background:#000}
+.strips video{width:100%;height:100%;object-fit:cover;filter:saturate(.85)}
+.hero::after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at center,rgba(14,13,11,.55) 0%,rgba(14,13,11,.78) 60%,rgba(14,13,11,.92) 100%)}
+.hero-copy{position:relative;z-index:1;text-align:center;padding:80px 24px}
+.hero h1{font-size:clamp(40px,8.4vw,104px);font-weight:500;letter-spacing:.08em;opacity:0;animation:rise 1s ease .2s forwards}
+.hero h1 span{display:inline-block}
+.hero .rule{width:min(420px,60vw);height:2px;background:var(--gold);margin:22px auto 18px;opacity:0;animation:grow .8s ease .7s forwards}
+.hero .claim{letter-spacing:.42em;font-weight:500;color:var(--gold);font-size:clamp(13px,1.6vw,20px);opacity:0;animation:rise .8s ease .8s forwards}
+.hero .lede{max-width:640px;margin:26px auto 0;color:var(--body);font-size:19px;opacity:0;animation:rise .8s ease 1s forwards}
+.cta{display:flex;flex-wrap:wrap;gap:14px;justify-content:center;margin-top:32px;opacity:0;animation:rise .8s ease 1.15s forwards}
+@keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@keyframes grow{from{opacity:0;transform:scaleX(0)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;opacity:1!important;transition:none!important}}
+
+/* numbers */
+.numbers{background:var(--surface);border-bottom:1px solid var(--line);padding:56px 0}
+.num-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+.num b{display:block;font-family:var(--serif);font-weight:600;font-size:clamp(40px,4.6vw,58px);color:var(--gold);line-height:1}
+.num span{display:block;margin-top:10px;color:var(--muted);font-size:15.5px;line-height:1.45}
+.asof{margin-top:28px;font-size:13.5px;color:var(--muted)}
+
+/* series */
+.series{padding:110px 0 40px}
+.show{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;padding:44px 0;border-top:1px solid var(--line)}
+.show:first-of-type{margin-top:48px}
+.poster{display:block;position:relative;aspect-ratio:9/16;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 30px 70px -30px rgba(0,0,0,.9),0 0 0 1px rgba(201,164,92,.18);cursor:pointer;border:0;padding:0;width:100%}
+.poster img{width:100%;height:100%;object-fit:cover;transition:transform .5s}
+.poster:hover img{transform:scale(1.03)}
+.poster .play{position:absolute;left:50%;top:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;background:rgba(14,13,11,.6);border:1.5px solid var(--gold);display:grid;place-items:center;color:var(--gold)}
+.poster .play svg{width:26px;height:26px;margin-left:4px}
+.show .stage{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.show h3{font-size:clamp(34px,3.6vw,46px);margin:8px 0 14px}
+.show p{margin:0;max-width:620px;color:var(--body);font-size:18px}
+.eps{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.ep{text-decoration:none;font:inherit;font-size:15px;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:var(--raise);color:var(--bright);cursor:pointer;display:inline-flex;gap:10px;align-items:center;transition:border-color .15s}
+.ep:hover{border-color:var(--gold)}
+.ep small{color:var(--muted);font-size:13px}
+.ep.new{border-color:rgba(201,164,92,.5)}
+
+/* plans */
+.plans{padding:110px 0;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.plan-grid{display:grid;grid-template-columns:repeat(2,minmax(0,420px));gap:22px;justify-content:center;margin-top:52px}
+.plan{background:var(--void);border:1.5px solid var(--line);border-radius:18px;padding:34px 32px;display:flex;flex-direction:column}
+.plan.premium{border-color:var(--gold);box-shadow:0 0 0 4px rgba(201,164,92,.08)}
+.plan .tier{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.plan h3{font-size:38px;margin:8px 0 6px}
+.plan .price{font-family:var(--serif);font-size:26px;color:var(--bright)}
+.plan .price small{font-family:var(--sans);font-size:14px;color:var(--muted);margin-left:6px}
+.plan ul{list-style:none;padding:0;margin:22px 0 28px;flex:1}
+.plan li{padding:9px 0 9px 30px;border-top:1px solid var(--line);position:relative;font-size:16px}
+.plan li::before{content:"";position:absolute;left:4px;top:17px;width:12px;height:7px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(-45deg)}
+.plan li.no{color:var(--muted)}
+.plan li.no::before{border:0;width:12px;height:2px;background:var(--muted);transform:none;top:21px}
+.plan .btn{justify-content:center}
+.plans .fine{text-align:center;margin-top:28px;font-size:14px;color:var(--muted)}
+
+/* case */
+.case{padding:110px 0}
+.steps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:52px;counter-reset:step}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px 22px}
+.step::before{counter-increment:step;content:"0" counter(step);font-family:var(--serif);font-size:30px;color:var(--gold);display:block;margin-bottom:8px}
+.step h4{margin:0 0 8px;font-family:var(--serif);font-size:22px;font-weight:600;color:var(--bright)}
+.step p{margin:0;font-size:15px;color:var(--muted);line-height:1.5}
+.learn{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:80px}
+.learn h3{color:var(--gold);font-size:28px;margin-bottom:10px}
+.learn p{margin:0;color:var(--body)}
+
+/* contact */
+.contact{padding:100px 0;text-align:center;background:linear-gradient(180deg,var(--void),#14110C);border-top:1px solid var(--line)}
+.contact .sub{color:var(--muted);font-size:19px;max-width:660px;margin:16px auto 0}
+.contact .cta{opacity:1;animation:none}
+
+footer{padding:56px 0 64px;text-align:center;color:var(--muted);font-size:14px;border-top:1px solid var(--line)}
+footer img{height:64px;width:auto;margin:0 auto 14px}
+footer .claim{letter-spacing:.42em;font-size:12.5px;color:var(--gold);font-weight:500;margin-bottom:18px}
+footer .links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+footer .links a{color:var(--bright);text-decoration:none}
+footer .links a:hover{color:var(--gold)}
+
+
+@media (max-width:980px){
+  .steps{grid-template-columns:repeat(2,1fr)}
+  .learn{grid-template-columns:1fr;gap:28px}
+  .num-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:760px){
+  .show{grid-template-columns:1fr;gap:24px}
+  .poster{max-width:260px}
+  .plan-grid{grid-template-columns:1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .navlinks a:not(.btn){display:none}
+  .brand span{font-size:17px;letter-spacing:.14em}
+  .brand img{height:34px}
+  .hero{min-height:78vh}
+  .hero h1{letter-spacing:.04em}
+  .hero .claim{letter-spacing:.24em}
+  .steps{grid-template-columns:1fr}
+  .series,.plans,.case,.contact{padding-top:72px;padding-bottom:72px}
+  .plan{padding:28px 22px}
+}
+</style>
+</head>
+<body>
+
+<nav id="top">
+  <div class="wrap">
+    <a class="brand" href="/"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
+    <div class="navlinks">
+      <a href="#series">Series</a>
+      <a href="#plans">Plans</a>
+      <a href="#case">The case</a>
+      <a href="/">Editor</a>
+      <a class="btn btn-primary btn-sm" href="watch">Watch now</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="strips" aria-hidden="true">
+    <video muted loop playsinline preload="metadata" poster="assets/microdramas/loop-cleaner.jpg" src="assets/microdramas/loop-cleaner.mp4"></video>
+    <video muted loop playsinline preload="metadata" poster="assets/microdramas/loop-anniv.jpg" src="assets/microdramas/loop-anniv.mp4"></video>
+    <video muted loop playsinline preload="metadata" poster="assets/microdramas/loop-jacket.jpg" src="assets/microdramas/loop-jacket.mp4"></video>
+  </div>
+  <div class="hero-copy">
+    <h1><span>BUCKSWOOD</span> <span>STUDIOS</span></h1>
+    <div class="rule"></div>
+    <div class="claim">ORIGINAL MICRODRAMAS</div>
+    <p class="lede">Betrayal, revenge &amp; second chances. Two-minute episodes that end on a cliffhanger, and you vote on what happens next.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="watch">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        <span>Watch now</span>
+      </a>
+      <a class="btn btn-ghost" href="#plans">See the plans</a>
+    </div>
+  </div>
+</header>
+
+<section class="numbers" aria-label="Results">
+  <div class="wrap">
+    <div class="num-grid">
+      <div class="num"><b>600k+</b><span>views in the first three days on YouTube</span></div>
+      <div class="num"><b>417k</b><span>views on a single pilot, The New Cleaner Ep. 1</span></div>
+      <div class="num"><b>~92%</b><span>average view duration on the two-minute pilots</span></div>
+      <div class="num"><b>3</b><span>series, five episodes, one small studio</span></div>
+    </div>
+    <p class="asof">Public YouTube view counts as of 12 November 2026. View duration from YouTube Studio.</p>
+  </div>
+</section>
+
+<section class="series" id="series">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">Now streaming</div>
+      <h2>Judged by their looks. Underestimated by everyone.</h2>
+      <p>Every story starts with someone being humiliated and ends with the moment the room finds out who they really are.</p>
+    </div>
+
+    <article class="show">
+      <a class="poster" href="watch#the-new-cleaner-1" aria-label="Play The New Cleaner, Episode 1">
+        <img src="assets/microdramas/cleaner1.jpg" alt="Ines, the new cleaner, looking up after the kick" loading="lazy" width="540" height="960">
+        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      </a>
+      <div>
+        <div class="stage">Series · 3 episodes</div>
+        <h3>The New Cleaner</h3>
+        <p>On her first day, the new cleaner gets kicked, mocked and told she's "done by lunch" by people who have no idea she just bought the company.</p>
+        <div class="eps">
+          <a class="ep" href="watch#the-new-cleaner-1">Ep. 1 <small>2:04</small></a>
+          <a class="ep" href="watch#the-new-cleaner-2">Ep. 2 <small>1:17</small></a>
+          <a class="ep new" href="watch#the-new-cleaner-3">Ep. 3 <small>New</small></a>
+          <a class="ep" href="https://www.youtube.com/watch?v=snBMFZ6arw8">Ep. 1 in 16:9 <small>on YouTube</small></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="show">
+      <a class="poster" href="watch#the-anniversary-1" aria-label="Play The Anniversary, Episode 1">
+        <img src="assets/microdramas/anniv1.jpg" alt="Elena and Grant at their anniversary dinner" loading="lazy" width="540" height="960">
+        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      </a>
+      <div>
+        <div class="stage">Series · Episode 1</div>
+        <h3>The Anniversary</h3>
+        <p>On their 15th anniversary he hands his wife divorce papers in front of the whole restaurant, while his girlfriend drinks from her glass. He keeps the house and the accounts. Or so he thinks.</p>
+        <div class="eps">
+          <a class="ep" href="watch#the-anniversary-1">Ep. 1 <small>2:05</small></a>
+        </div>
+      </div>
+    </article>
+
+    <article class="show">
+      <a class="poster" href="watch#the-worn-jacket-1" aria-label="Play The Worn Jacket, Episode 1">
+        <img src="assets/microdramas/jacket1.jpg" alt="Gus in his worn work jacket" loading="lazy" width="540" height="960">
+        <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></span>
+      </a>
+      <div>
+        <div class="stage">New series · Episode 1</div>
+        <h3>The Worn Jacket</h3>
+        <p>A 71-year-old man in a worn work jacket walks into a luxury car dealership to buy his granddaughter a car. They throw a used-car key at his chest and show him the door. Then the regional director walks in.</p>
+        <div class="eps">
+          <a class="ep new" href="watch#the-worn-jacket-1">Ep. 1 <small>New</small></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="plans" id="plans">
+  <div class="wrap">
+    <div class="sec-head" style="margin:0 auto;text-align:center">
+      <div class="eyebrow">Plans</div>
+      <h2>Watch free, or watch without ads.</h2>
+      <p>Every series streams here, with new episodes every day. Pick how you want to watch.</p>
+    </div>
+    <div class="plan-grid">
+      <div class="plan">
+        <div class="tier">Free</div>
+        <h3>With ads</h3>
+        <div class="price">€0 <small>forever</small></div>
+        <ul>
+          <li>Every episode of every series</li>
+          <li>New episodes every day</li>
+          <li>Vote on what happens next</li>
+          <li class="no">Short ad before each episode</li>
+        </ul>
+        <a class="btn btn-ghost" href="watch">Start watching</a>
+      </div>
+      <div class="plan premium">
+        <div class="tier">Premium</div>
+        <h3>No ads</h3>
+        <div class="price">Price at launch <small>monthly, cancel anytime</small></div>
+        <ul>
+          <li>Every episode, no ads at all</li>
+          <li>New episodes a day early</li>
+          <li>Binge whole seasons in one go</li>
+          <li>Supports the next series</li>
+        </ul>
+        <a class="btn btn-primary" href="mailto:luikienle@gmail.com?subject=Buckswood%20Premium%20%E2%80%93%20notify%20me">Notify me at launch</a>
+      </div>
+    </div>
+    <p class="fine">Premium opens soon. Every episode is also free on <a href="https://www.youtube.com/@Buckswood-Studios" style="color:var(--gold)">YouTube</a>.</p>
+  </div>
+</section>
+
+<section class="case" id="case">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="eyebrow">The case</div>
+      <h2>A two-minute series a day, made with AI.</h2>
+      <p>Buckswood Studios writes, casts, shoots and cuts every episode in its own AI pipeline. No sets, no crew, and a new episode every day.</p>
+    </div>
+    <div class="steps">
+      <div class="step"><h4>Story</h4><p>A familiar trope, a hook in the first two seconds and a cliffhanger at the end.</p></div>
+      <div class="step"><h4>Cast</h4><p>Invented characters with fixed faces and wardrobe sheets, so every episode matches the last.</p></div>
+      <div class="step"><h4>Location</h4><p>One reference image per set keeps the room, light and layout the same from shot to shot.</p></div>
+      <div class="step"><h4>Shoot</h4><p>Video generation with Seedance 2.5: drafts at low resolution, then the chosen take finished at 1080p.</p></div>
+      <div class="step"><h4>Cut &amp; publish</h4><p>Edited, mixed and released in 9:16 and 16:9 on YouTube, Facebook and Instagram.</p></div>
+    </div>
+    <div class="learn">
+      <div><h3>Who watches</h3><p>Mostly viewers over 55 in the US, the UK, Canada and Australia. About nine in ten views come straight from the Shorts feed, not from subscribers.</p></div>
+      <div><h3>What holds them</h3><p>Respect, karma and a reveal. The pilots run two minutes and are still watched to the end, because each scene raises the stakes.</p></div>
+      <div><h3>What brings them back</h3><p>A simple vote at the end: "Fire him or give him a second chance?" The audience picks the next episode, and the comments fill up.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <div class="wrap">
+    <div class="eyebrow">Work with us</div>
+    <h2>Pilots, series and the pipeline behind them.</h2>
+    <p class="sub">For studios, broadcasters, platforms and brands that want vertical drama at the speed of social media.</p>
+    <div class="cta">
+      <a class="btn btn-primary" href="mailto:luikienle@gmail.com?subject=Buckswood%20Microdramas">Get in touch</a>
+      <a class="btn btn-ghost" href="https://www.youtube.com/@Buckswood-Studios">YouTube channel</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="assets/mark.png" alt="">
+    <div class="claim">MAKE EVERYONE HAPPY</div>
+    <div class="links">
+      <a href="#series">Series</a>
+      <a href="https://www.youtube.com/@Buckswood-Studios">YouTube</a>
+      <a href="/">AI Video Production Editor</a>
+    </div>
+    <div>Buckswood Studios · Original Microdramas · made by Ludwig Maximillian Kienle</div>
+    <div style="margin-top:8px">All characters and stories are fictional and made with AI.</div>
+  </div>
+</footer>
+
+
+<script>
+(function(){
+  var nav=document.getElementById('top');
+  addEventListener('scroll',function(){nav.classList.toggle('scrolled',scrollY>8)},{passive:true});
+
+  // hero loops: play only while on screen, never under reduced motion or Save-Data
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches||(navigator.connection&&navigator.connection.saveData);
+  var vids=document.querySelectorAll('.strips video');
+  if(!calm&&'IntersectionObserver' in window){
+    new IntersectionObserver(function(es){
+      es.forEach(function(e){vids.forEach(function(v){e.isIntersecting?v.play().catch(function(){}):v.pause()})});
+    }).observe(document.querySelector('.hero'));
+  }
+
+})();
+</script>
+</body>
+</html>

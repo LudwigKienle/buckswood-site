@@ -47,6 +47,7 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 .navlinks{display:flex;gap:28px;align-items:center;font-size:15px}
 .navlinks a{text-decoration:none;color:var(--muted)}
 .navlinks a:hover{color:var(--green)}
+.navlinks a.btn-primary{color:var(--cream)}
 .btn{display:inline-flex;align-items:center;gap:10px;border-radius:999px;padding:14px 26px;font-weight:500;font-size:16px;text-decoration:none;border:1.5px solid var(--green);transition:transform .15s,background .15s,color .15s}
 .btn:hover{transform:translateY(-1px)}
 .btn-primary{background:var(--green);color:var(--cream)}
@@ -72,8 +73,25 @@ nav .wrap{display:flex;align-items:center;justify-content:space-between;height:6
 
 .shot{margin:56px auto 0;max-width:1080px;border-radius:14px;overflow:hidden;box-shadow:0 30px 80px -30px rgba(31,58,45,.45),0 0 0 1px rgba(31,58,45,.08)}
 
+/* microdramas teaser */
+.dramas{background:#0E0D0B;color:#D8CFC0;padding:88px 0;margin-top:96px}
+.dramas .wrap{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.dramas .eyebrow{color:#C9A45C}
+.dramas h2{color:#F6F1E7;margin-top:10px}
+.dramas p{font-size:19px;margin:18px 0 0;max-width:520px}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px}
+.btn-gold{background:#C9A45C;border-color:#C9A45C;color:#0E0D0B}
+.btn-gold:hover{background:#D8B66E}
+.btn-line{border-color:#C9A45C;color:#C9A45C}
+.btn-line:hover{background:#C9A45C;color:#0E0D0B}
+.posters{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.posters img{width:100%;height:auto;aspect-ratio:9/16;object-fit:cover;border-radius:12px;box-shadow:0 24px 50px -24px rgba(0,0,0,.9),0 0 0 1px rgba(201,164,92,.2);transition:transform .3s}
+.posters img:nth-child(2){transform:translateY(-18px)}
+.posters:hover img{transform:translateY(-4px)}
+.posters:hover img:nth-child(2){transform:translateY(-22px)}
+
 /* myth */
-.myth{background:var(--green);color:var(--cream);padding:96px 0;margin-top:96px}
+.myth{background:var(--green);color:var(--cream);padding:96px 0}
 .myth h2{color:var(--cream)}
 .myth .eyebrow{color:#D6B06A}
 .myth-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:48px}
@@ -138,7 +156,8 @@ footer .links a{color:var(--green);text-decoration:none}
 
 @media (max-width:900px){
   .grid,.myth-grid{grid-template-columns:1fr 1fr}
-  .agents .wrap{grid-template-columns:1fr}
+  .agents .wrap,.dramas .wrap{grid-template-columns:1fr}
+  .dramas .wrap{gap:40px}
 }
 @media (max-width:640px){
   .wrap{padding:0 16px}
@@ -150,7 +169,8 @@ footer .links a{color:var(--green);text-decoration:none}
   .grid,.myth-grid,.dl-grid{grid-template-columns:1fr}
   .hero{padding-top:44px}
   .hero .claim{letter-spacing:.28em;font-size:12px}
-  .myth,.tools,.agents,.download{padding-top:72px;padding-bottom:72px}
+  .myth,.tools,.agents,.download,.dramas{padding-top:72px;padding-bottom:72px}
+  .dramas{margin-top:72px}
 }
 </style>
 </head>
@@ -160,6 +180,7 @@ footer .links a{color:var(--green);text-decoration:none}
   <div class="wrap">
     <a class="brand" href="#"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
     <div class="navlinks">
+      <a href="microdramas">Microdramas</a>
       <a href="#tools">Tools</a>
       <a href="#agents">Agents</a>
       <a href="https://github.com/LudwigKienle/ai-video-production-editor">GitHub</a>
@@ -185,6 +206,25 @@ footer .links a{color:var(--green);text-decoration:none}
   <div class="meta"><span data-version>v3.1.0</span> · macOS (Apple Silicon) &amp; Windows · GPL-3.0</div>
   <div class="shot"><img src="assets/studio-moodboard.jpg" alt="The Buckswood moodboard workspace" width="1600" height="1000"></div>
 </header>
+
+<section class="dramas" id="microdramas">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">New · Buckswood Studios</div>
+      <h2>Original Microdramas.</h2>
+      <p>Two-minute episodes about betrayal, revenge and second chances, made with AI. 600k+ views on YouTube in the first three days. Watch free with ads, or go ad-free with Premium.</p>
+      <div class="cta-row">
+        <a class="btn btn-gold" href="watch">Watch now</a>
+        <a class="btn btn-line" href="microdramas">See the series &amp; the case</a>
+      </div>
+    </div>
+    <a class="posters" href="microdramas" aria-label="See the microdrama series">
+      <img src="assets/microdramas/cleaner1.jpg" alt="The New Cleaner" loading="lazy" width="540" height="960">
+      <img src="assets/microdramas/anniv1.jpg" alt="The Anniversary" loading="lazy" width="540" height="960">
+      <img src="assets/microdramas/jacket1.jpg" alt="The Worn Jacket" loading="lazy" width="540" height="960">
+    </a>
+  </div>
+</section>
 
 <section class="myth">
   <div class="wrap">
@@ -321,6 +361,7 @@ Done. The storyboard is open in the studio.</pre>
     <img src="assets/mark.png" alt="">
     <div class="claim">MAKE EVERYONE HAPPY</div>
     <div class="links">
+      <a href="microdramas">Microdramas</a>
       <a href="https://github.com/LudwigKienle/ai-video-production-editor">GitHub</a>
       <a href="https://github.com/LudwigKienle/ai-video-production-editor/releases">Releases</a>
       <a href="https://github.com/LudwigKienle/ai-video-production-editor/blob/main/LICENSE">License (GPL-3.0)</a>
