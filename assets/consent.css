@@ -1,0 +1,13 @@
+/* Consent banner for assets/consent.js. Self-contained so every page can use it.
+   Both choices carry the same visual weight. */
+.consent{position:fixed;z-index:60;left:max(16px,env(safe-area-inset-left,0px));right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));max-width:560px;margin:0 auto;background:#151517;color:#EDEAE4;border:1px solid #26262A;border-radius:18px;padding:20px 22px;box-shadow:0 30px 80px -20px #000;font-family:-apple-system,"SF Pro Text",BlinkMacSystemFont,"Inter","Helvetica Neue",Arial,sans-serif}
+.consent[hidden]{display:none}
+.consent h2{margin:0;font-size:19px;font-weight:600;letter-spacing:-.02em;color:#EDEAE4;font-family:inherit}
+.consent p{margin:8px 0 0;font-size:14.5px;line-height:1.45;color:#8E8B86}
+.consent p a{color:#EDEAE4}
+.consent-acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+.consent-acts button{min-height:44px;border:0;border-radius:10px;background:#2B2B30;color:#EDEAE4;font:500 15px/1.2 inherit;font-family:inherit;cursor:pointer}
+.consent-acts button:hover{background:#3A3A40}
+.consent-acts button:focus-visible{outline:2px solid #F2BE22;outline-offset:2px}
+.linkish{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer;text-decoration:none}
+.linkish:hover{color:#F2BE22}

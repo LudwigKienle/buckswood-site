@@ -3,23 +3,23 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Buckswood Studios</title>
+<title>Buckswood Studios – Watch Original Microdramas</title>
 <meta name="description" content="Original microdramas from Buckswood Studios: two-minute episodes about betrayal, revenge and second chances. Watch free with ads, or ad-free with Premium.">
 <meta name="theme-color" content="#0C0C0D">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://buckswood.art/">
-<link rel="canonical" href="https://buckswood.art/">
+<meta property="og:site_name" content="Buckswood Studios">
+<meta property="og:url" content="https://www.buckswood.art/">
+<link rel="canonical" href="https://www.buckswood.art/">
 <meta property="og:title" content="Buckswood Studios – Original Microdramas">
 <meta property="og:description" content="Two-minute episodes about betrayal, revenge and second chances.">
-<meta property="og:image" content="https://buckswood.art/assets/microdramas/banner.jpg">
+<meta property="og:image" content="https://www.buckswood.art/assets/microdramas/banner.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="assets/mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/consent.css">
 <link rel="stylesheet" href="assets/platform.css">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Organization","name":"Buckswood Studios","url":"https://buckswood.art/","logo":"https://buckswood.art/assets/mark.png","founder":{"@type":"Person","name":"Ludwig Maximillian Kienle"},"sameAs":["https://www.youtube.com/@Buckswood-Studios"]}
+{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://www.buckswood.art/#org","name":"Buckswood Studios","url":"https://www.buckswood.art/","logo":"https://www.buckswood.art/assets/mark.png","email":"luikienle@gmail.com","founder":{"@type":"Person","name":"Ludwig Maximillian Kienle"},"sameAs":["https://www.youtube.com/@Buckswood-Studios"]},{"@type":"WebSite","name":"Buckswood Studios","url":"https://www.buckswood.art/","publisher":{"@id":"https://www.buckswood.art/#org"},"inLanguage":"en"},{"@type":"ItemList","name":"Series","itemListElement":[{"@type":"ListItem","position":1,"url":"https://www.buckswood.art/series/the-new-cleaner"},{"@type":"ListItem","position":2,"url":"https://www.buckswood.art/series/the-anniversary"},{"@type":"ListItem","position":3,"url":"https://www.buckswood.art/series/the-worn-jacket"}]}]}
 </script>
 <style>
 /* featured banner */
@@ -110,13 +110,13 @@
   <div class="shell">
     <div class="copy">
       <div class="meta"><span class="badge" id="f-badge">New episode</span><span class="label" id="f-label"></span></div>
-      <h1 id="f-title"></h1>
-      <p class="hook" id="f-hook"></p>
-      <p class="log" id="f-log"></p>
+      <h1 id="f-title">The New Cleaner</h1>
+      <p class="hook" id="f-hook">They mocked the cleaner. She owns the company.</p>
+      <p class="log" id="f-log">On her first day, the new cleaner gets kicked, mocked and told she's "done by lunch" by people who have no idea she just bought the company.</p>
       <div class="tags" id="f-tags"></div>
       <div class="acts">
-        <a class="btn btn-spot" id="f-play" href="watch"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Play episode 1</span></a>
-        <a class="btn" id="f-latest" href="watch">Latest episode</a>
+        <a class="btn btn-spot" id="f-play" href="watch#the-new-cleaner-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span>Play episode 1</span></a>
+        <a class="btn" id="f-latest" href="series/the-new-cleaner">All episodes</a>
       </div>
       <div class="picker" id="picker" aria-label="Choose a featured series"></div>
     </div>
@@ -179,15 +179,23 @@
       <a class="brand" href="/"><img src="assets/mark.png" alt=""><span>BUCKSWOOD</span></a>
       <p>Original microdramas made with AI by Buckswood Studios. All characters and stories are fictional.</p>
     </div>
+    <nav aria-label="Series">
+      <a href="series/the-new-cleaner">The New Cleaner</a>
+      <a href="series/the-anniversary">The Anniversary</a>
+      <a href="series/the-worn-jacket">The Worn Jacket</a>
+    </nav>
     <nav aria-label="Footer">
       <a href="about">About &amp; partners</a>
       <a href="https://www.youtube.com/@Buckswood-Studios">YouTube</a>
       <a href="editor">AI Video Production Editor</a>
       <a href="impressum">Impressum</a>
+      <a href="datenschutz">Datenschutz</a>
+      <button type="button" class="linkish" data-consent>Cookie settings</button>
     </nav>
   </div>
 </footer>
 
+<script src="/assets/consent.js"></script>
 <script src="assets/catalog.js"></script>
 <script>
 (function(){
@@ -233,8 +241,7 @@
     var tags=document.getElementById('f-tags');tags.textContent='';
     s.tags.forEach(function(t){var c=document.createElement('span');c.className='chip';c.textContent=t;tags.appendChild(c)});
     document.getElementById('f-play').href='watch#'+s.eps[0].id;
-    var l=document.getElementById('f-latest');l.href='watch#'+last.id;l.textContent=s.eps.length>1?'Latest: episode '+last.n:'Episode details';
-    l.hidden=s.eps.length<2;
+    var l=document.getElementById('f-latest');l.href='series/'+s.id;l.textContent='All episodes';
     video.poster='assets/microdramas/'+s.loop+'.jpg';video.src='assets/microdramas/'+s.loop+'.mp4';
     if(!calm)video.play().catch(function(){});
     picker.querySelectorAll('button').forEach(function(b,j){b.setAttribute('aria-current',j===i);b.querySelector('img').classList.toggle('lit',j===i)});
@@ -256,7 +263,7 @@
   // ---- trending, ranked
   var ranked=document.getElementById('ranked');
   S.slice().sort(function(a,b){return a.rank-b.rank}).forEach(function(s){
-    var c=card('watch#'+s.eps[0].id,s.cover,s.title,s.eps.length+(s.eps.length>1?' episodes':' episode'));
+    var c=card('series/'+s.id,s.cover,s.title,s.eps.length+(s.eps.length>1?' episodes':' episode'));
     var n=document.createElement('span');n.className='num';n.setAttribute('aria-hidden','true');n.textContent=s.rank;
     c.insertBefore(n,c.firstChild);c.setAttribute('aria-label','Number '+s.rank+': '+s.title);ranked.appendChild(c);
   });
@@ -278,7 +285,7 @@
   function renderGrid(){
     grid.textContent='';
     S.filter(function(s){return active==='All'||s.tags.indexOf(active)>=0}).forEach(function(s){
-      var c=card('watch#'+s.eps[0].id,s.cover,s.title,null,latest(s).isNew?[{t:'New'}]:null);
+      var c=card('series/'+s.id,s.cover,s.title,null,latest(s).isNew?[{t:'New'}]:null);
       var u=document.createElement('div');u.className='under';u.textContent=s.tags.join(' · ');c.appendChild(u);grid.appendChild(c);
     });
   }

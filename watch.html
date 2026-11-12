@@ -7,14 +7,13 @@
 <meta name="description" content="Watch Buckswood Studios original microdramas: free with ads, or ad-free with Premium.">
 <meta name="theme-color" content="#0C0C0D">
 <meta property="og:type" content="video.other">
-<meta property="og:url" content="https://buckswood.art/watch">
-<link rel="canonical" href="https://buckswood.art/watch">
+<meta property="og:url" content="https://www.buckswood.art/watch">
+<link rel="canonical" href="https://www.buckswood.art/watch">
 <meta property="og:title" content="Watch – Buckswood Studios">
-<meta property="og:image" content="https://buckswood.art/assets/microdramas/banner.jpg">
+<meta property="og:image" content="https://www.buckswood.art/assets/microdramas/banner.jpg">
 <link rel="icon" type="image/png" href="assets/mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..800&family=Cormorant+Garamond:wght@600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/fonts/fonts.css">
+<link rel="stylesheet" href="/assets/consent.css">
 <link rel="stylesheet" href="assets/platform.css">
 <style>
 main.watch{max-width:1320px;margin:0 auto;padding:20px var(--gut-r) 0 var(--gut);display:grid;grid-template-columns:auto auto minmax(0,1fr);gap:20px 28px;align-items:start}
@@ -167,7 +166,7 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
     <div class="epgrid" id="epgrid"></div>
     <div class="upsell"><p><b>Watch without ads.</b> Premium removes every ad and opens new episodes a day early.</p><button class="btn btn-spot btn-sm" data-plans type="button">See Premium</button></div>
     <div class="more"><h3>More series</h3><div class="rail" id="more"></div></div>
-    <p class="legal-line"><a href="about">About</a> · <a href="impressum">Impressum</a></p>
+    <p class="legal-line"><a href="series/the-new-cleaner">The New Cleaner</a> · <a href="series/the-anniversary">The Anniversary</a> · <a href="series/the-worn-jacket">The Worn Jacket</a> · <a href="about">About</a> · <a href="impressum">Impressum</a> · <a href="datenschutz">Datenschutz</a> · <button type="button" class="linkish" data-consent>Cookie settings</button></p>
   </div>
 </main>
 
@@ -190,6 +189,7 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
   <p class="demo">Preview: <button id="demo-toggle" type="button">see the site as a Premium member</button></p>
 </dialog>
 
+<script src="/assets/consent.js"></script>
 <script src="assets/catalog.js"></script>
 <script>
 (function(){
@@ -278,7 +278,9 @@ dialog .sub{text-align:center;color:var(--ash);margin:8px auto 22px;max-width:46
 
   function play(){
     cover.hidden=true;
-    var needsAd=!BW.isPremium()&&(played%AD_EVERY===0);
+    // Ads load only after the viewer accepted them in the consent banner.
+    var consent=window.BWConsent&&BWConsent.ads()===true;
+    var needsAd=consent&&!BW.isPremium()&&(played%AD_EVERY===0);
     played++;
     if(needsAd)playAd(startContent);else startContent();
   }
